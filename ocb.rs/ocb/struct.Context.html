@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="API documentation for the Rust `Context` struct in crate `ocb`.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, Context">
+
+    <title>ocb::Context - Rust</title>
+
+    <link rel="stylesheet" type="text/css" href="../main.css">
+
+    
+    
+</head>
+<body class="rustdoc">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    
+
+    <section class="sidebar">
+        
+        <p class='location'><a href='index.html'>ocb</a></p><script>window.sidebarCurrent = {name: 'Context', ty: 'struct', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+    </section>
+
+    <nav class="sub">
+        <form class="search-form js-only">
+            <div class="search-container">
+                <input class="search-input" name="search"
+                       autocomplete="off"
+                       placeholder="Click or press 'S' to search, '?' for more options..."
+                       type="search">
+            </div>
+        </form>
+    </nav>
+
+    <section id='main' class="content struct">
+<h1 class='fqn'><span class='in-band'>Struct <a href='index.html'>ocb</a>::<wbr><a class='struct' href=''>Context</a><wbr></span><span class='out-of-band'><span id='render-detail'>
+            <a id="collapse-all" href="#">[-]</a>&nbsp;<a id="expand-all" href="#">[+]</a>
+        </span><a id='src-1111' href='../src/ocb/lib.rs.html#54-57'>[src]</a></span></h1>
+<pre class='rust struct'>pub struct Context {
+    // some fields omitted
+}</pre><div class='docblock'><p>An OCB encryption/decryption context.</p>
+</div><h2 id='methods'>Methods</h2><h3 class='impl'><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='struct' href='../ocb/struct.Context.html' title='ocb::Context'>Context</a></code></h3><div class='impl-items'><h4 id='method.new' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.new' class='fnname'>new</a>(key: <a class='struct' href='../ocb/struct.Key.html' title='ocb::Key'>Key</a>) -&gt; <a class='type' href='../ocb/type.Result.html' title='ocb::Result'>Result</a>&lt;<a class='struct' href='../ocb/struct.Context.html' title='ocb::Context'>Context</a>&gt;</code></h4>
+<div class='docblock'><p>Initialize an OCB context with the given key.</p>
+</div><h4 id='method.encrypt' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.encrypt' class='fnname'>encrypt</a>&lt;N&gt;(&amp;mut self, nonce_stream: &amp;mut N, plaintext: <a href='http://doc.rust-lang.org/nightly/std/primitive.slice.html'>&amp;[</a><a href='http://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a><a href='http://doc.rust-lang.org/nightly/std/primitive.slice.html'>]</a>, assoc_data: <a href='http://doc.rust-lang.org/nightly/std/primitive.slice.html'>&amp;[</a><a href='http://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a><a href='http://doc.rust-lang.org/nightly/std/primitive.slice.html'>]</a>) -&gt; <a class='type' href='../ocb/type.Result.html' title='ocb::Result'>Result</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.tuple.html'>(<a class='struct' href='../ocb/struct.Nonce.html' title='ocb::Nonce'>Nonce</a>, <a class='struct' href='http://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a>&gt;)</a>&gt; <span class='where'>where N: <a class='trait' href='http://doc.rust-lang.org/nightly/core/iter/trait.Iterator.html' title='core::iter::Iterator'>Iterator</a>&lt;Item=<a class='struct' href='../ocb/struct.Nonce.html' title='ocb::Nonce'>Nonce</a>&gt;</span></code></h4>
+<div class='docblock'><p>Encrypt and authenticate a message.</p>
+
+<p>The <code>nonce_stream</code> iterator is used to obtain a nonce, a &quot;number used
+once&quot;, just for this encryption.  You <em>must not</em> encrypt two messages
+using the same key and nonce. This will fatally compromise security.
+Take extra care when using the same key in multiple processes or on
+multiple machines.  It&#39;s often better for each direction of
+communication to have its own key.</p>
+
+<p>The nonce is not secret.  It&#39;s usually transmitted along with the
+message, and it&#39;s needed at the receiving end.  The nonce is allowed to
+be predictable, as well.  A simple counter is a good source of unique
+nonces, so long as it&#39;s reset only when the key changes.  The type
+<code>Counter</code> implements such a nonce source, but you can use any
+<code>Iterator&lt;Item=Nonce&gt;</code>, so long as it <em>never</em> produces the same value
+twice (for the same key).</p>
+
+<p>The &quot;associated data&quot; is authenticated as well, but it is not encrypted
+or copied into the output.  In other words, decryption will succeed if
+and only if the receiver supplies the same associated data.  For example,
+it could be transmitted in the clear alongside the encrypted message.</p>
+
+<p>Many applications don&#39;t need associated data and can pass an empty slice.</p>
+</div><h4 id='method.decrypt' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.decrypt' class='fnname'>decrypt</a>(&amp;mut self, nonce: <a class='struct' href='../ocb/struct.Nonce.html' title='ocb::Nonce'>Nonce</a>, ciphertext: <a href='http://doc.rust-lang.org/nightly/std/primitive.slice.html'>&amp;[</a><a href='http://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a><a href='http://doc.rust-lang.org/nightly/std/primitive.slice.html'>]</a>, assoc_data: <a href='http://doc.rust-lang.org/nightly/std/primitive.slice.html'>&amp;[</a><a href='http://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a><a href='http://doc.rust-lang.org/nightly/std/primitive.slice.html'>]</a>) -&gt; <a class='type' href='../ocb/type.Result.html' title='ocb::Result'>Result</a>&lt;<a class='struct' href='http://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a>&gt;&gt;</code></h4>
+<div class='docblock'><p>Decrypt and verify a message.</p>
+
+<p>If the ciphertext was generated correctly, using the specified nonce and
+associated data, with the key stored in this context, then <code>decrypt</code> will
+return the original plaintext.  Otherwise, you get an error saying what
+went wrong.</p>
+</div></div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><a class='stability Stable' title='Stable'></a><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/ops/trait.Drop.html' title='core::ops::Drop'>Drop</a> for <a class='struct' href='../ocb/struct.Context.html' title='ocb::Context'>Context</a></code></h3><div class='impl-items'><h4 id='method.drop' class='method'><a class='stability Stable' title='Stable'></a><code>fn <a href='#method.drop' class='fnname'>drop</a>(&amp;mut self)</code></h4>
+</div></section>
+    <section id='search' class="content hidden"></section>
+
+    <section class="footer"></section>
+
+    <div id="help" class="hidden">
+        <div class="shortcuts">
+            <h1>Keyboard shortcuts</h1>
+            <dl>
+                <dt>?</dt>
+                <dd>Show this help dialog</dd>
+                <dt>S</dt>
+                <dd>Focus the search field</dd>
+                <dt>&larrb;</dt>
+                <dd>Move up in search results</dd>
+                <dt>&rarrb;</dt>
+                <dd>Move down in search results</dd>
+                <dt>&#9166;</dt>
+                <dd>Go to active search result</dd>
+            </dl>
+        </div>
+        <div class="infos">
+            <h1>Search tricks</h1>
+            <p>
+                Prefix searches with a type followed by a colon (e.g.
+                <code>fn:</code>) to restrict the search to a given type.
+            </p>
+            <p>
+                Accepted types are: <code>fn</code>, <code>mod</code>,
+                <code>struct</code>, <code>enum</code>,
+                <code>trait</code>, <code>typedef</code> (or
+                <code>tdef</code>).
+            </p>
+        </div>
+    </div>
+
+    
+
+    <script>
+        window.rootPath = "../";
+        window.currentCrate = "ocb";
+        window.playgroundUrl = "";
+    </script>
+    <script src="../jquery.js"></script>
+    <script src="../main.js"></script>
+    
+    <script async src="../search-index.js"></script>
+</body>
+</html>
