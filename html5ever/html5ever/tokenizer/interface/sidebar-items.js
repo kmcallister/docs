@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["Attribute","A tag attribute."],["Doctype","A `DOCTYPE` token."],["Tag","A tag token."]],"enum":[["TagKind",""],["Token",""]],"trait":[["TokenSink","Types which can receive tokens from the tokenizer."]]});
+initSidebarItems({"trait":[["TokenSink","Types which can receive tokens from the tokenizer."]],"enum":[["TagKind",""],["Token",""]],"struct":[["Attribute","A tag attribute."],["Doctype","A `DOCTYPE` token."],["Tag","A tag token."]]});
