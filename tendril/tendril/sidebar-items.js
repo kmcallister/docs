@@ -1,0 +1,1 @@
+initSidebarItems({"enum":[["SubtendrilError",""]],"type":[["ByteTendril","`Tendril` for storing binary data."],["StrTendril","`Tendril` for storing native Rust strings."]],"mod":[["fmt","Marker types for formats."]],"struct":[["Tendril",""]],"trait":[["SliceExt","`Tendril`-related methods for Rust slices."]]});
