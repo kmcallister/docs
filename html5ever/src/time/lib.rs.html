@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/time-0.1.23/src/lib.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/time-0.1.24/src/lib.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>lib.rs.html -- source</title>
@@ -1541,6 +1541,10 @@
 <span id="1499">1499</span>
 <span id="1500">1500</span>
 <span id="1501">1501</span>
+<span id="1502">1502</span>
+<span id="1503">1503</span>
+<span id="1504">1504</span>
+<span id="1505">1505</span>
 </pre><pre class='rust '>
 <span class='comment'>// Copyright 2012-2013 The Rust Project Developers. See the COPYRIGHT</span>
 <span class='comment'>// file at the top-level directory of this distribution and at</span>
@@ -1571,6 +1575,7 @@
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>cmp</span>::<span class='ident'>Ordering</span>;
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>fmt</span>;
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>ops</span>::{<span class='ident'>Add</span>, <span class='ident'>Sub</span>};
+<span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>io</span>;
 
 <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;std-duration&quot;</span>)]</span>      <span class='kw'>pub</span> <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>time</span>::<span class='ident'>Duration</span>;
 <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>not</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;std-duration&quot;</span>))]</span> <span class='kw'>pub</span> <span class='kw'>use</span> <span class='ident'>duration</span>::<span class='ident'>Duration</span>;
@@ -1595,7 +1600,7 @@
 
     <span class='kw'>extern</span> {
         <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>rust_time_gmtime</span>(<span class='ident'>sec</span>: <span class='ident'>i64</span>, <span class='ident'>nsec</span>: <span class='ident'>i32</span>, <span class='ident'>result</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>Tm</span>);
-        <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>rust_time_localtime</span>(<span class='ident'>sec</span>: <span class='ident'>i64</span>, <span class='ident'>nsec</span>: <span class='ident'>i32</span>, <span class='ident'>result</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>Tm</span>);
+        <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>rust_time_localtime</span>(<span class='ident'>sec</span>: <span class='ident'>i64</span>, <span class='ident'>nsec</span>: <span class='ident'>i32</span>, <span class='ident'>result</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>Tm</span>) <span class='op'>-&gt;</span> <span class='ident'>i32</span>;
         <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>rust_time_timegm</span>(<span class='ident'>tm</span>: <span class='kw-2'>&amp;</span><span class='ident'>Tm</span>) <span class='op'>-&gt;</span> <span class='ident'>i64</span>;
         <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>rust_time_mktime</span>(<span class='ident'>tm</span>: <span class='kw-2'>&amp;</span><span class='ident'>Tm</span>) <span class='op'>-&gt;</span> <span class='ident'>i64</span>;
     }
@@ -2279,7 +2284,10 @@
     <span class='kw'>unsafe</span> {
         <span class='kw'>let</span> <span class='ident'>Timespec</span> { <span class='ident'>sec</span>, <span class='ident'>nsec</span> } <span class='op'>=</span> <span class='ident'>clock</span>;
         <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>tm</span> <span class='op'>=</span> <span class='ident'>empty_tm</span>();
-        <span class='ident'>rustrt</span>::<span class='ident'>rust_time_localtime</span>(<span class='ident'>sec</span>, <span class='ident'>nsec</span>, <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>tm</span>);
+        <span class='kw'>if</span> <span class='ident'>rustrt</span>::<span class='ident'>rust_time_localtime</span>(<span class='ident'>sec</span>, <span class='ident'>nsec</span>, <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>tm</span>) <span class='op'>==</span> <span class='number'>0</span> {
+            <span class='macro'>panic</span><span class='macro'>!</span>(<span class='string'>&quot;failed to call localtime: {}&quot;</span>,
+                   <span class='ident'>io</span>::<span class='ident'>Error</span>::<span class='ident'>last_os_error</span>());
+        }
         <span class='ident'>tm</span>
     }
 }
@@ -2392,7 +2400,7 @@
     }
 }
 
-<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Copy</span>, <span class='ident'>PartialEq</span>, <span class='ident'>Debug</span>)]</span>
+<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Copy</span>, <span class='ident'>PartialEq</span>, <span class='ident'>Debug</span>, <span class='ident'>Clone</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>enum</span> <span class='ident'>ParseError</span> {
     <span class='ident'>InvalidSecond</span>,
     <span class='ident'>InvalidMinute</span>,

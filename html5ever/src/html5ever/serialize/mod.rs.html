@@ -272,7 +272,7 @@
 <span class='kw'>use</span> <span class='ident'>string_cache</span>::{<span class='ident'>Atom</span>, <span class='ident'>QualName</span>};
 
 <span class='comment'>//§ serializing-html-fragments</span>
-<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Copy</span>, <span class='ident'>PartialEq</span>)]</span>
+<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Copy</span>, <span class='ident'>Clone</span>, <span class='ident'>PartialEq</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>enum</span> <span class='ident'>TraversalScope</span> {
     <span class='ident'>IncludeNode</span>,
     <span class='ident'>ChildrenOnly</span>
@@ -290,7 +290,7 @@
     <span class='ident'>node</span>.<span class='ident'>serialize</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>ser</span>, <span class='ident'>opts</span>.<span class='ident'>traversal_scope</span>)
 }
 
-<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Copy</span>)]</span>
+<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Copy</span>, <span class='ident'>Clone</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>SerializeOpts</span> {
     <span class='doccomment'>/// Is scripting enabled?</span>
     <span class='kw'>pub</span> <span class='ident'>scripting_enabled</span>: <span class='ident'>bool</span>,

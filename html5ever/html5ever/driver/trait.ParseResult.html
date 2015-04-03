@@ -43,11 +43,11 @@
     <section id='main' class="content trait">
 <h1 class='fqn'><span class='in-band'>Trait <a href='../index.html'>html5ever</a>::<wbr><a href='index.html'>driver</a>::<wbr><a class='trait' href=''>ParseResult</a><wbr></span><span class='out-of-band'><span id='render-detail'>
             <a id="collapse-all" href="#">[-]</a>&nbsp;<a id="expand-all" href="#">[+]</a>
-        </span><a id='src-99573' href='../../src/html5ever/driver.rs.html#123-126'>[src]</a></span></h1>
+        </span><a id='src-99609' href='../../src/html5ever/driver.rs.html#123-126'>[src]</a></span></h1>
 <pre class='rust trait'>pub trait ParseResult {
     type Sink: <a class='trait' href='../../html5ever/tree_builder/interface/trait.TreeSink.html' title='html5ever::tree_builder::interface::TreeSink'>TreeSink</a> + <a class='trait' href='http://doc.rust-lang.org/nightly/core/default/trait.Default.html' title='core::default::Default'>Default</a>;
 
-    fn <a href='#tymethod.get_result' class='fnname'>get_result</a>(sink: Self::Sink) -&gt; Self;
+    fn <a href='#tymethod.get_result' class='fnname'>get_result</a>(sink: Self::<a class='trait' href='../../html5ever/driver/trait.ParseResult.html' title='html5ever::driver::ParseResult'>Sink</a>) -&gt; Self;
 }</pre><div class='docblock'><p>Results which can be extracted from a <code>TreeSink</code>.</p>
 
 <p>Implement this for your parse tree data type so that it
@@ -58,7 +58,7 @@ can be returned by <code>parse()</code>.</p>
         <h3 id='associatedtype.Sink' class='method'><a class='stability Unmarked' title='No stability level'></a><code>type Sink: <a class='trait' href='../../html5ever/tree_builder/interface/trait.TreeSink.html' title='html5ever::tree_builder::interface::TreeSink'>TreeSink</a> + <a class='trait' href='http://doc.rust-lang.org/nightly/core/default/trait.Default.html' title='core::default::Default'>Default</a></code></h3></div>
             <h2 id='required-methods'>Required Methods</h2>
             <div class='methods'>
-        <h3 id='tymethod.get_result' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#tymethod.get_result' class='fnname'>get_result</a>(sink: Self::Sink) -&gt; Self</code></h3></div>
+        <h3 id='tymethod.get_result' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#tymethod.get_result' class='fnname'>get_result</a>(sink: Self::<a class='trait' href='../../html5ever/driver/trait.ParseResult.html' title='html5ever::driver::ParseResult'>Sink</a>) -&gt; Self</code></h3></div>
         <h2 id='implementors'>Implementors</h2>
         <ul class='item-list' id='implementors-list'>
     <li><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='../../html5ever/driver/trait.ParseResult.html' title='html5ever::driver::ParseResult'>ParseResult</a> for <a class='struct' href='../../html5ever/sink/rcdom/struct.RcDom.html' title='html5ever::sink::rcdom::RcDom'>RcDom</a></code></li>
