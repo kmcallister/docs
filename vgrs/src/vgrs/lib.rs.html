@@ -738,7 +738,7 @@
 
     <span class='doccomment'>/// Result of `count_leaks` or `count_leak_blocks`, in</span>
     <span class='doccomment'>/// bytes or blocks respectively.</span>
-    <span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Copy</span>)]</span>
+    <span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Copy</span>, <span class='ident'>Clone</span>)]</span>
     <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>LeakCount</span> {
         <span class='kw'>pub</span> <span class='ident'>leaked</span>: <span class='ident'>usize</span>,
         <span class='kw'>pub</span> <span class='ident'>dubious</span>: <span class='ident'>usize</span>,
