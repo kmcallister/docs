@@ -1445,6 +1445,7 @@
 <span id="1403">1403</span>
 <span id="1404">1404</span>
 <span id="1405">1405</span>
+<span id="1406">1406</span>
 </pre><pre class='rust '>
 <span class='comment'>// Licensed under the Apache License, Version 2.0 &lt;LICENSE-APACHE or</span>
 <span class='comment'>// http://www.apache.org/licenses/LICENSE-2.0&gt; or the MIT license</span>
@@ -2436,6 +2437,7 @@
         <span class='ident'>encoding</span>.<span class='ident'>encode_to</span>(<span class='kw-2'>&amp;</span><span class='op'>*</span><span class='self'>self</span>, <span class='ident'>trap</span>, <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>ret</span>).<span class='ident'>map</span>(<span class='op'>|</span>_<span class='op'>|</span> <span class='ident'>ret</span>)
     }
 
+    <span class='doccomment'>/// Push a character onto the end.</span>
     <span class='attribute'>#[<span class='ident'>inline</span>]</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>push_char</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>c</span>: <span class='ident'>char</span>) {
         <span class='kw'>unsafe</span> {

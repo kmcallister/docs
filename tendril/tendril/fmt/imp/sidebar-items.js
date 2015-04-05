@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["Fixup","Describes how to fix up encodings when concatenating."]]});
+initSidebarItems({"struct":[["Fixup","Describes how to fix up encodings when concatenating."],["SingleByteCharIndices",""]]});
