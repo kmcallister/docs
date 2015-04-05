@@ -1507,6 +1507,8 @@
 <span id="1465">1465</span>
 <span id="1466">1466</span>
 <span id="1467">1467</span>
+<span id="1468">1468</span>
+<span id="1469">1469</span>
 </pre><pre class='rust '>
 <span class='comment'>// Licensed under the Apache License, Version 2.0 &lt;LICENSE-APACHE or</span>
 <span class='comment'>// http://www.apache.org/licenses/LICENSE-2.0&gt; or the MIT license</span>
@@ -2548,6 +2550,8 @@
 }
 
 <span class='doccomment'>/// Create a `StrTendril` through string formatting.</span>
+<span class='doccomment'>///</span>
+<span class='doccomment'>/// Works just like the standard `format!` macro.</span>
 <span class='attribute'>#[<span class='ident'>macro_export</span>]</span>
 <span class='macro'>macro_rules</span><span class='macro'>!</span> <span class='ident'>format_tendril</span> {
     ($(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>arg</span>:<span class='ident'>tt</span>)<span class='op'>*</span>) <span class='op'>=&gt;</span> (<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>crate</span>::<span class='ident'>Tendril</span>::<span class='ident'>format</span>(<span class='macro'>format_args</span><span class='macro'>!</span>($(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>arg</span>)<span class='op'>*</span>)))
