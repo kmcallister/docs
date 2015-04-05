@@ -1446,6 +1446,67 @@
 <span id="1404">1404</span>
 <span id="1405">1405</span>
 <span id="1406">1406</span>
+<span id="1407">1407</span>
+<span id="1408">1408</span>
+<span id="1409">1409</span>
+<span id="1410">1410</span>
+<span id="1411">1411</span>
+<span id="1412">1412</span>
+<span id="1413">1413</span>
+<span id="1414">1414</span>
+<span id="1415">1415</span>
+<span id="1416">1416</span>
+<span id="1417">1417</span>
+<span id="1418">1418</span>
+<span id="1419">1419</span>
+<span id="1420">1420</span>
+<span id="1421">1421</span>
+<span id="1422">1422</span>
+<span id="1423">1423</span>
+<span id="1424">1424</span>
+<span id="1425">1425</span>
+<span id="1426">1426</span>
+<span id="1427">1427</span>
+<span id="1428">1428</span>
+<span id="1429">1429</span>
+<span id="1430">1430</span>
+<span id="1431">1431</span>
+<span id="1432">1432</span>
+<span id="1433">1433</span>
+<span id="1434">1434</span>
+<span id="1435">1435</span>
+<span id="1436">1436</span>
+<span id="1437">1437</span>
+<span id="1438">1438</span>
+<span id="1439">1439</span>
+<span id="1440">1440</span>
+<span id="1441">1441</span>
+<span id="1442">1442</span>
+<span id="1443">1443</span>
+<span id="1444">1444</span>
+<span id="1445">1445</span>
+<span id="1446">1446</span>
+<span id="1447">1447</span>
+<span id="1448">1448</span>
+<span id="1449">1449</span>
+<span id="1450">1450</span>
+<span id="1451">1451</span>
+<span id="1452">1452</span>
+<span id="1453">1453</span>
+<span id="1454">1454</span>
+<span id="1455">1455</span>
+<span id="1456">1456</span>
+<span id="1457">1457</span>
+<span id="1458">1458</span>
+<span id="1459">1459</span>
+<span id="1460">1460</span>
+<span id="1461">1461</span>
+<span id="1462">1462</span>
+<span id="1463">1463</span>
+<span id="1464">1464</span>
+<span id="1465">1465</span>
+<span id="1466">1466</span>
+<span id="1467">1467</span>
 </pre><pre class='rust '>
 <span class='comment'>// Licensed under the Apache License, Version 2.0 &lt;LICENSE-APACHE or</span>
 <span class='comment'>// http://www.apache.org/licenses/LICENSE-2.0&gt; or the MIT license</span>
@@ -1476,6 +1537,19 @@
 <span class='kw'>const</span> <span class='ident'>MAX_INLINE_TAG</span>: <span class='ident'>usize</span> <span class='op'>=</span> <span class='number'>0xF</span>;
 <span class='kw'>const</span> <span class='ident'>EMPTY_TAG</span>: <span class='ident'>usize</span> <span class='op'>=</span> <span class='number'>0xF</span>;
 
+<span class='attribute'>#[<span class='ident'>inline</span>(<span class='ident'>always</span>)]</span>
+<span class='kw'>fn</span> <span class='ident'>inline_tag</span>(<span class='ident'>len</span>: <span class='ident'>u32</span>) <span class='op'>-&gt;</span> <span class='ident'>NonZero</span><span class='op'>&lt;</span><span class='ident'>usize</span><span class='op'>&gt;</span> {
+    <span class='macro'>debug_assert</span><span class='macro'>!</span>(<span class='ident'>len</span> <span class='op'>&lt;=</span> <span class='ident'>MAX_INLINE_LEN</span> <span class='kw'>as</span> <span class='ident'>u32</span>);
+    <span class='kw'>unsafe</span> {
+        <span class='ident'>NonZero</span>::<span class='ident'>new</span>(<span class='kw'>if</span> <span class='ident'>len</span> <span class='op'>==</span> <span class='number'>0</span> {
+            <span class='ident'>EMPTY_TAG</span>
+        } <span class='kw'>else</span> {
+            <span class='ident'>len</span> <span class='kw'>as</span> <span class='ident'>usize</span>
+        })
+    }
+}
+
+<span class='attribute'>#[<span class='ident'>repr</span>(<span class='ident'>packed</span>)]</span>
 <span class='kw'>struct</span> <span class='ident'>Header</span> {
     <span class='ident'>refcount</span>: <span class='ident'>Cell</span><span class='op'>&lt;</span><span class='ident'>usize</span><span class='op'>&gt;</span>,
     <span class='ident'>cap</span>: <span class='ident'>u32</span>,
@@ -2187,11 +2261,9 @@
 
     <span class='attribute'>#[<span class='ident'>inline</span>]</span>
     <span class='kw'>unsafe</span> <span class='kw'>fn</span> <span class='ident'>inline</span>(<span class='ident'>x</span>: <span class='kw-2'>&amp;</span>[<span class='ident'>u8</span>]) <span class='op'>-&gt;</span> <span class='ident'>Tendril</span><span class='op'>&lt;</span><span class='ident'>F</span><span class='op'>&gt;</span> {
-        <span class='macro'>debug_assert</span><span class='macro'>!</span>(<span class='ident'>x</span>.<span class='ident'>len</span>() <span class='op'>&lt;=</span> <span class='ident'>MAX_INLINE_LEN</span>);
-
         <span class='kw'>let</span> <span class='ident'>len</span> <span class='op'>=</span> <span class='ident'>x</span>.<span class='ident'>len</span>();
         <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>t</span> <span class='op'>=</span> <span class='ident'>Tendril</span> {
-            <span class='ident'>ptr</span>: <span class='ident'>Cell</span>::<span class='ident'>new</span>(<span class='ident'>NonZero</span>::<span class='ident'>new</span>(<span class='kw'>if</span> <span class='ident'>len</span> <span class='op'>==</span> <span class='number'>0</span> { <span class='ident'>EMPTY_TAG</span> } <span class='kw'>else</span> { <span class='ident'>len</span> })),
+            <span class='ident'>ptr</span>: <span class='ident'>Cell</span>::<span class='ident'>new</span>(<span class='ident'>inline_tag</span>(<span class='ident'>len</span> <span class='kw'>as</span> <span class='ident'>u32</span>)),
             <span class='ident'>len</span>: <span class='ident'>mem</span>::<span class='ident'>uninitialized</span>(),
             <span class='ident'>aux</span>: <span class='ident'>mem</span>::<span class='ident'>uninitialized</span>(),
             <span class='ident'>marker</span>: <span class='ident'>PhantomData</span>,
@@ -2381,6 +2453,24 @@
         <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>ret</span> <span class='op'>=</span> <span class='ident'>Tendril</span>::<span class='ident'>new</span>();
         <span class='ident'>encoding</span>.<span class='ident'>decode_to</span>(<span class='kw-2'>&amp;</span><span class='op'>*</span><span class='self'>self</span>, <span class='ident'>trap</span>, <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>ret</span>).<span class='ident'>map</span>(<span class='op'>|</span>_<span class='op'>|</span> <span class='ident'>ret</span>)
     }
+
+    <span class='doccomment'>/// Push &quot;uninitialized bytes&quot; onto the end.</span>
+    <span class='doccomment'>///</span>
+    <span class='doccomment'>/// Really, this grows the tendril without writing anything to the new area.</span>
+    <span class='doccomment'>/// It&#39;s only defined for byte tendrils because it&#39;s only useful if you</span>
+    <span class='doccomment'>/// plan to then mutate the buffer.</span>
+    <span class='attribute'>#[<span class='ident'>inline</span>]</span>
+    <span class='kw'>pub</span> <span class='kw'>unsafe</span> <span class='kw'>fn</span> <span class='ident'>push_uninitialized</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>n</span>: <span class='ident'>u32</span>) {
+        <span class='kw'>let</span> <span class='ident'>new_len</span> <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>len32</span>().<span class='ident'>checked_add</span>(<span class='ident'>n</span>).<span class='ident'>expect</span>(<span class='ident'>OFLOW</span>);
+        <span class='kw'>if</span> <span class='ident'>new_len</span> <span class='op'>&lt;=</span> <span class='ident'>MAX_INLINE_LEN</span> <span class='kw'>as</span> <span class='ident'>u32</span>
+            <span class='op'>&amp;&amp;</span> <span class='op'>*</span><span class='self'>self</span>.<span class='ident'>ptr</span>.<span class='ident'>get</span>() <span class='op'>&lt;=</span> <span class='ident'>MAX_INLINE_TAG</span>
+        {
+            <span class='self'>self</span>.<span class='ident'>ptr</span>.<span class='ident'>set</span>(<span class='ident'>inline_tag</span>(<span class='ident'>new_len</span>))
+        } <span class='kw'>else</span> {
+            <span class='self'>self</span>.<span class='ident'>make_owned_with_capacity</span>(<span class='ident'>new_len</span>);
+            <span class='self'>self</span>.<span class='ident'>len</span> <span class='op'>=</span> <span class='ident'>new_len</span>;
+        }
+    }
 }
 
 <span class='kw'>impl</span> <span class='ident'>strfmt</span>::<span class='ident'>Display</span> <span class='kw'>for</span> <span class='ident'>Tendril</span><span class='op'>&lt;</span><span class='ident'>fmt</span>::<span class='ident'>UTF8</span><span class='op'>&gt;</span> {
@@ -2446,6 +2536,21 @@
             <span class='self'>self</span>.<span class='ident'>push_bytes_without_validating</span>(<span class='ident'>unsafe_slice</span>(<span class='kw-2'>&amp;</span><span class='ident'>buf</span>, <span class='number'>0</span>, <span class='ident'>n</span>));
         }
     }
+
+    <span class='doccomment'>/// Helper for the `format_tendril!` macro.</span>
+    <span class='attribute'>#[<span class='ident'>inline</span>]</span>
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>format</span>(<span class='ident'>args</span>: <span class='ident'>strfmt</span>::<span class='ident'>Arguments</span>) <span class='op'>-&gt;</span> <span class='ident'>Tendril</span><span class='op'>&lt;</span><span class='ident'>fmt</span>::<span class='ident'>UTF8</span><span class='op'>&gt;</span> {
+        <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>fmt</span>::<span class='ident'>Write</span>;
+        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>output</span>: <span class='ident'>Tendril</span><span class='op'>&lt;</span><span class='ident'>fmt</span>::<span class='ident'>UTF8</span><span class='op'>&gt;</span> <span class='op'>=</span> <span class='ident'>Tendril</span>::<span class='ident'>new</span>();
+        <span class='kw'>let</span> _ <span class='op'>=</span> <span class='macro'>write</span><span class='macro'>!</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>output</span>, <span class='string'>&quot;{}&quot;</span>, <span class='ident'>args</span>);
+        <span class='ident'>output</span>
+    }
+}
+
+<span class='doccomment'>/// Create a `StrTendril` through string formatting.</span>
+<span class='attribute'>#[<span class='ident'>macro_export</span>]</span>
+<span class='macro'>macro_rules</span><span class='macro'>!</span> <span class='ident'>format_tendril</span> {
+    ($(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>arg</span>:<span class='ident'>tt</span>)<span class='op'>*</span>) <span class='op'>=&gt;</span> (<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>crate</span>::<span class='ident'>Tendril</span>::<span class='ident'>format</span>(<span class='macro'>format_args</span><span class='macro'>!</span>($(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>arg</span>)<span class='op'>*</span>)))
 }
 
 <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>test</span>)]</span>
@@ -2454,7 +2559,7 @@
 
 <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>test</span>)]</span>
 <span class='kw'>mod</span> <span class='ident'>test</span> {
-    <span class='kw'>use</span> <span class='ident'>super</span>::{<span class='ident'>Tendril</span>, <span class='ident'>ByteTendril</span>, <span class='ident'>StrTendril</span>, <span class='ident'>SliceExt</span>};
+    <span class='kw'>use</span> <span class='ident'>super</span>::{<span class='ident'>Tendril</span>, <span class='ident'>ByteTendril</span>, <span class='ident'>StrTendril</span>, <span class='ident'>SliceExt</span>, <span class='ident'>Header</span>};
     <span class='kw'>use</span> <span class='ident'>fmt</span>;
 
     <span class='attribute'>#[<span class='ident'>test</span>]</span>
@@ -2478,6 +2583,9 @@
         <span class='comment'>// Check that the NonZero&lt;T&gt; optimization is working.</span>
         <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>correct</span>, <span class='ident'>mem</span>::<span class='ident'>size_of</span>::<span class='op'>&lt;</span><span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>ByteTendril</span><span class='op'>&gt;&gt;</span>());
         <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>correct</span>, <span class='ident'>mem</span>::<span class='ident'>size_of</span>::<span class='op'>&lt;</span><span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>StrTendril</span><span class='op'>&gt;&gt;</span>());
+
+        <span class='kw'>let</span> <span class='ident'>correct_header</span> <span class='op'>=</span> <span class='ident'>mem</span>::<span class='ident'>size_of</span>::<span class='op'>&lt;</span><span class='op'>*</span><span class='kw'>const</span> ()<span class='op'>&gt;</span>() <span class='op'>+</span> <span class='number'>4</span>;
+        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>correct_header</span>, <span class='ident'>mem</span>::<span class='ident'>size_of</span>::<span class='op'>&lt;</span><span class='ident'>Header</span><span class='op'>&gt;</span>());
     }
 
     <span class='attribute'>#[<span class='ident'>test</span>]</span>
@@ -2742,6 +2850,14 @@
         <span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>t</span>.<span class='ident'>try_reinterpret_view</span>::<span class='op'>&lt;</span><span class='ident'>fmt</span>::<span class='ident'>UTF8</span><span class='op'>&gt;</span>().<span class='ident'>is_err</span>());
         <span class='ident'>t</span>[<span class='number'>3</span>] <span class='op'>=</span> <span class='number'>0x8b</span>;
         <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='string'>&quot;xyŋ&quot;</span>, <span class='kw-2'>&amp;</span><span class='op'>*</span><span class='op'>*</span><span class='ident'>t</span>.<span class='ident'>try_reinterpret_view</span>::<span class='op'>&lt;</span><span class='ident'>fmt</span>::<span class='ident'>UTF8</span><span class='op'>&gt;</span>().<span class='ident'>unwrap</span>());
+
+        <span class='kw'>unsafe</span> {
+            <span class='ident'>t</span>.<span class='ident'>push_uninitialized</span>(<span class='number'>3</span>);
+            <span class='ident'>t</span>[<span class='number'>4</span>] <span class='op'>=</span> <span class='number'>0xEA</span>;
+            <span class='ident'>t</span>[<span class='number'>5</span>] <span class='op'>=</span> <span class='number'>0x99</span>;
+            <span class='ident'>t</span>[<span class='number'>6</span>] <span class='op'>=</span> <span class='number'>0xAE</span>;
+            <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='string'>&quot;xyŋ\u{a66e}&quot;</span>, <span class='kw-2'>&amp;</span><span class='op'>*</span><span class='op'>*</span><span class='ident'>t</span>.<span class='ident'>try_reinterpret_view</span>::<span class='op'>&lt;</span><span class='ident'>fmt</span>::<span class='ident'>UTF8</span><span class='op'>&gt;</span>().<span class='ident'>unwrap</span>());
+        }
     }
 
     <span class='attribute'>#[<span class='ident'>test</span>]</span>
@@ -2851,6 +2967,12 @@
         <span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>t</span>.<span class='ident'>try_push_char</span>(<span class='string'>&#39;\u{a66e}&#39;</span>).<span class='ident'>is_err</span>());
         <span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>t</span>.<span class='ident'>try_push_char</span>(<span class='string'>&#39;\u{1f4a9}&#39;</span>).<span class='ident'>is_err</span>());
         <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='string'>b&quot;x\0\xa0&quot;</span>, <span class='ident'>t</span>.<span class='ident'>as_byte_slice</span>());
+    }
+
+    <span class='attribute'>#[<span class='ident'>test</span>]</span>
+    <span class='kw'>fn</span> <span class='ident'>format</span>() {
+        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='string'>&quot;&quot;</span>, <span class='kw-2'>&amp;</span><span class='op'>*</span><span class='macro'>format_tendril</span><span class='macro'>!</span>(<span class='string'>&quot;&quot;</span>));
+        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='string'>&quot;two and two make 4&quot;</span>, <span class='kw-2'>&amp;</span><span class='op'>*</span><span class='macro'>format_tendril</span><span class='macro'>!</span>(<span class='string'>&quot;two and two make {}&quot;</span>, <span class='number'>2</span><span class='op'>+</span><span class='number'>2</span>));
     }
 }
 </pre>

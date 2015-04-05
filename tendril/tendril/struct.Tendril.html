@@ -43,7 +43,7 @@
     <section id='main' class="content struct">
 <h1 class='fqn'><span class='in-band'>Struct <a href='index.html'>tendril</a>::<wbr><a class='struct' href=''>Tendril</a><wbr></span><span class='out-of-band'><span id='render-detail'>
             <a id="collapse-all" href="#">[-]</a>&nbsp;<a id="expand-all" href="#">[+]</a>
-        </span><a id='src-2150' href='../src/tendril/tendril.rs.html#78-85'>[src]</a></span></h1>
+        </span><a id='src-2207' href='../src/tendril/tendril.rs.html#91-98'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct Tendril&lt;F&gt; <span class='where'>where F: <a class='trait' href='../tendril/fmt/trait.Format.html' title='tendril::fmt::Format'>Format</a></span> {
     // some fields omitted
 }</pre><div class='docblock'><p>Compact string type for zero-copy parsing.</p>
@@ -190,6 +190,12 @@ which are classified the same according to the function <code>classify</code>.</
 
 <p>See the <a href="https://lifthrasiir.github.io/rust-encoding/encoding/">rust-encoding docs</a>
 for more information.</p>
+</div><h4 id='method.push_uninitialized' class='method'><a class='stability Unmarked' title='No stability level'></a><code>unsafe fn <a href='#method.push_uninitialized' class='fnname'>push_uninitialized</a>(&amp;mut self, n: <a href='http://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a>)</code></h4>
+<div class='docblock'><p>Push &quot;uninitialized bytes&quot; onto the end.</p>
+
+<p>Really, this grows the tendril without writing anything to the new area.
+It&#39;s only defined for byte tendrils because it&#39;s only useful if you
+plan to then mutate the buffer.</p>
 </div></div><h3 class='impl'><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='struct' href='../tendril/struct.Tendril.html' title='tendril::Tendril'>Tendril</a>&lt;<a class='struct' href='../tendril/fmt/struct.UTF8.html' title='tendril::fmt::UTF8'>UTF8</a>&gt;</code></h3><div class='impl-items'><h4 id='method.encode' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.encode' class='fnname'>encode</a>(&amp;self, encoding: <a class='type' href='../encoding/types/type.EncodingRef.html' title='encoding::types::EncodingRef'>EncodingRef</a>, trap: <a class='enum' href='../encoding/types/enum.EncoderTrap.html' title='encoding::types::EncoderTrap'>EncoderTrap</a>) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a class='struct' href='../tendril/struct.Tendril.html' title='tendril::Tendril'>Tendril</a>&lt;<a class='struct' href='../tendril/fmt/struct.Bytes.html' title='tendril::fmt::Bytes'>Bytes</a>&gt;, <a class='enum' href='http://doc.rust-lang.org/nightly/collections/borrow/enum.Cow.html' title='collections::borrow::Cow'>Cow</a>&lt;'static, <a href='http://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>&gt;&gt;</code></h4>
 <div class='docblock'><p>Encode from UTF-8 into some other character encoding.</p>
 
@@ -197,6 +203,8 @@ for more information.</p>
 for more information.</p>
 </div><h4 id='method.push_char' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.push_char' class='fnname'>push_char</a>(&amp;mut self, c: <a href='http://doc.rust-lang.org/nightly/std/primitive.char.html'>char</a>)</code></h4>
 <div class='docblock'><p>Push a character onto the end.</p>
+</div><h4 id='method.format' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.format' class='fnname'>format</a>(args: <a class='struct' href='http://doc.rust-lang.org/nightly/core/fmt/struct.Arguments.html' title='core::fmt::Arguments'>Arguments</a>) -&gt; <a class='struct' href='../tendril/struct.Tendril.html' title='tendril::Tendril'>Tendril</a>&lt;<a class='struct' href='../tendril/fmt/struct.UTF8.html' title='tendril::fmt::UTF8'>UTF8</a>&gt;</code></h4>
+<div class='docblock'><p>Helper for the <code>format_tendril!</code> macro.</p>
 </div></div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><a class='stability Stable' title='Stable'></a><code>impl&lt;F&gt; <a class='trait' href='http://doc.rust-lang.org/nightly/core/clone/trait.Clone.html' title='core::clone::Clone'>Clone</a> for <a class='struct' href='../tendril/struct.Tendril.html' title='tendril::Tendril'>Tendril</a>&lt;F&gt; <span class='where'>where F: <a class='trait' href='../tendril/fmt/trait.Format.html' title='tendril::fmt::Format'>Format</a></span></code></h3><div class='impl-items'><h4 id='method.clone' class='method'><a class='stability Stable' title='Stable'></a><code>fn <a href='#method.clone' class='fnname'>clone</a>(&amp;self) -&gt; <a class='struct' href='../tendril/struct.Tendril.html' title='tendril::Tendril'>Tendril</a>&lt;F&gt;</code></h4>
 <h4 id='method.clone_from' class='tymethod'><a class='stability Unstable' title='Unstable: this function is rarely used'></a><code>fn <a href='#tymethod.clone_from' class='fnname'>clone_from</a>(&amp;mut self, source: &amp;Self)</code></h4>
 </div><h3 class='impl'><a class='stability Stable' title='Stable'></a><code>impl&lt;F&gt; <a class='trait' href='http://doc.rust-lang.org/nightly/core/ops/trait.Drop.html' title='core::ops::Drop'>Drop</a> for <a class='struct' href='../tendril/struct.Tendril.html' title='tendril::Tendril'>Tendril</a>&lt;F&gt; <span class='where'>where F: <a class='trait' href='../tendril/fmt/trait.Format.html' title='tendril::fmt::Format'>Format</a></span></code></h3><div class='impl-items'><h4 id='method.drop' class='method'><a class='stability Stable' title='Stable'></a><code>fn <a href='#method.drop' class='fnname'>drop</a>(&amp;mut self)</code></h4>

@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/git/checkouts/rust-encoding-01eb6e8fe1f1e4cd/buffer/src/lib.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/encoding-0.2.29/src/lib.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>lib.rs.html -- source</title>
@@ -302,6 +302,22 @@
 <span id="260">260</span>
 <span id="261">261</span>
 <span id="262">262</span>
+<span id="263">263</span>
+<span id="264">264</span>
+<span id="265">265</span>
+<span id="266">266</span>
+<span id="267">267</span>
+<span id="268">268</span>
+<span id="269">269</span>
+<span id="270">270</span>
+<span id="271">271</span>
+<span id="272">272</span>
+<span id="273">273</span>
+<span id="274">274</span>
+<span id="275">275</span>
+<span id="276">276</span>
+<span id="277">277</span>
+<span id="278">278</span>
 </pre><pre class='rust '>
 <span class='comment'>// This is a part of rust-encoding.</span>
 <span class='comment'>// Copyright (c) 2013-2015, Kang Seonghoon.</span>
@@ -309,7 +325,7 @@
 
 <span class='doccomment'>/*!
 
-# Encoding 0.2.28
+# Encoding 0.2.29
 
 Character encoding support for Rust. (also known as `rust-encoding`)
 It is based on [WHATWG Encoding Standard](http://encoding.spec.whatwg.org/),
@@ -385,6 +401,22 @@ assert_eq!(ISO_8859_6.decode(&amp;[65,99,109,101,169], DecoderTrap::Replace),
            Ok(&quot;Acme\u{fffd}&quot;.to_string()));
 assert_eq!(ISO_8859_6.decode(&amp;[65,99,109,101,169], DecoderTrap::Ignore),
            Ok(&quot;Acme&quot;.to_string()));
+~~~~
+
+To encode or decode the input into the already allocated buffer:
+
+~~~~ {.rust}
+use encoding::{Encoding, EncoderTrap, DecoderTrap};
+use encoding::all::{ISO_8859_2, ISO_8859_6};
+
+let mut bytes = Vec::new();
+let mut chars = String::new();
+
+assert!(ISO_8859_2.encode_to(&quot;Acme\u{a9}&quot;, EncoderTrap::Ignore, &amp;mut bytes).is_ok());
+assert!(ISO_8859_6.decode_to(&amp;[65,99,109,101,169], DecoderTrap::Replace, &amp;mut chars).is_ok());
+
+assert_eq!(bytes, [65,99,109,101]);
+assert_eq!(chars, &quot;Acme\u{fffd}&quot;);
 ~~~~
 
 A practical example of custom encoder traps:
