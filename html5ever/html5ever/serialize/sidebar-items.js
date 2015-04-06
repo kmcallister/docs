@@ -1,1 +1,1 @@
-initSidebarItems({"trait":[["Serializable",""]],"type":[["AttrRef",""]],"struct":[["SerializeOpts",""],["Serializer",""]],"enum":[["TraversalScope",""]],"fn":[["serialize",""]]});
+initSidebarItems({"enum":[["TraversalScope",""]],"fn":[["serialize",""]],"type":[["AttrRef",""]],"trait":[["Serializable",""]],"struct":[["SerializeOpts",""],["Serializer",""]]});
