@@ -115,6 +115,16 @@
 <span id="73">73</span>
 <span id="74">74</span>
 <span id="75">75</span>
+<span id="76">76</span>
+<span id="77">77</span>
+<span id="78">78</span>
+<span id="79">79</span>
+<span id="80">80</span>
+<span id="81">81</span>
+<span id="82">82</span>
+<span id="83">83</span>
+<span id="84">84</span>
+<span id="85">85</span>
 </pre><pre class='rust '>
 <span class='comment'>// Copyright 2014 The html5ever Project Developers. See the</span>
 <span class='comment'>// COPYRIGHT file at the top-level directory of this distribution.</span>
@@ -164,7 +174,6 @@
 <span class='attribute'>#[<span class='ident'>inline</span>(<span class='ident'>always</span>)]</span> <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>empty_set</span>(_: <span class='ident'>QualName</span>) <span class='op'>-&gt;</span> <span class='ident'>bool</span> { <span class='boolval'>false</span> }
 <span class='attribute'>#[<span class='ident'>inline</span>(<span class='ident'>always</span>)]</span> <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>full_set</span>(_: <span class='ident'>QualName</span>) <span class='op'>-&gt;</span> <span class='ident'>bool</span> { <span class='boolval'>true</span> }
 
-<span class='comment'>// FIXME: MathML, SVG</span>
 <span class='macro'>declare_tag_set</span><span class='macro'>!</span>(<span class='kw'>pub</span> <span class='ident'>default_scope</span> <span class='op'>=</span> <span class='ident'>applet</span> <span class='ident'>caption</span> <span class='ident'>html</span> <span class='ident'>table</span> <span class='ident'>td</span> <span class='ident'>th</span> <span class='ident'>marquee</span> <span class='ident'>object</span> <span class='ident'>template</span>);
 
 <span class='macro'>declare_tag_set</span><span class='macro'>!</span>(<span class='kw'>pub</span> <span class='ident'>list_item_scope</span> <span class='op'>=</span> <span class='ident'>default_scope</span> <span class='op'>+</span> <span class='ident'>ol</span> <span class='ident'>ul</span>);
@@ -191,6 +200,17 @@
     <span class='ident'>param</span> <span class='ident'>plaintext</span> <span class='ident'>pre</span> <span class='ident'>script</span> <span class='ident'>section</span> <span class='ident'>select</span> <span class='ident'>source</span> <span class='ident'>style</span> <span class='ident'>summary</span> <span class='ident'>table</span> <span class='ident'>tbody</span> <span class='ident'>td</span> <span class='ident'>template</span>
     <span class='ident'>textarea</span> <span class='ident'>tfoot</span> <span class='ident'>th</span> <span class='ident'>thead</span> <span class='ident'>title</span> <span class='ident'>tr</span> <span class='ident'>track</span> <span class='ident'>ul</span> <span class='ident'>wbr</span> <span class='ident'>xmp</span>);
 <span class='comment'>//§ END</span>
+
+<span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>mathml_text_integration_point</span>(<span class='ident'>p</span>: <span class='ident'>QualName</span>) <span class='op'>-&gt;</span> <span class='ident'>bool</span> {
+    <span class='macro'>matches</span><span class='macro'>!</span>(<span class='ident'>p</span>, <span class='macro'>qualname</span><span class='macro'>!</span>(<span class='ident'>MathML</span>, <span class='ident'>mi</span>) <span class='op'>|</span> <span class='macro'>qualname</span><span class='macro'>!</span>(<span class='ident'>MathML</span>, <span class='ident'>mo</span>) <span class='op'>|</span> <span class='macro'>qualname</span><span class='macro'>!</span>(<span class='ident'>MathML</span>, <span class='ident'>mn</span>)
+        <span class='op'>|</span> <span class='macro'>qualname</span><span class='macro'>!</span>(<span class='ident'>MathML</span>, <span class='ident'>ms</span>) <span class='op'>|</span> <span class='macro'>qualname</span><span class='macro'>!</span>(<span class='ident'>MathML</span>, <span class='ident'>mtext</span>))
+}
+
+<span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>html_integration_point</span>(<span class='ident'>p</span>: <span class='ident'>QualName</span>) <span class='op'>-&gt;</span> <span class='ident'>bool</span> {
+    <span class='comment'>// FIXME(#119): HTML integration points in MathML</span>
+    <span class='macro'>matches</span><span class='macro'>!</span>(<span class='ident'>p</span>, <span class='macro'>qualname</span><span class='macro'>!</span>(<span class='ident'>SVG</span>, <span class='ident'>foreignObject</span>) <span class='op'>|</span> <span class='macro'>qualname</span><span class='macro'>!</span>(<span class='ident'>SVG</span>, <span class='ident'>desc</span>)
+        <span class='op'>|</span> <span class='macro'>qualname</span><span class='macro'>!</span>(<span class='ident'>SVG</span>, <span class='ident'>title</span>))
+}
 </pre>
 </section>
     <section id='search' class="content hidden"></section>

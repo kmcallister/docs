@@ -119,6 +119,7 @@
 <span id="77">77</span>
 <span id="78">78</span>
 <span id="79">79</span>
+<span id="80">80</span>
 </pre><pre class='rust '>
 <span class='comment'>// Copyright 2014 The html5ever Project Developers. See the</span>
 <span class='comment'>// COPYRIGHT file at the top-level directory of this distribution.</span>
@@ -193,6 +194,7 @@
     <span class='ident'>DoneAckSelfClosing</span>,
     <span class='ident'>SplitWhitespace</span>(<span class='ident'>String</span>),
     <span class='ident'>Reprocess</span>(<span class='ident'>InsertionMode</span>, <span class='ident'>Token</span>),
+    <span class='ident'>ReprocessForeign</span>(<span class='ident'>Token</span>),
 }
 
 <span class='kw'>pub</span> <span class='kw'>enum</span> <span class='ident'>FormatEntry</span><span class='op'>&lt;</span><span class='ident'>Handle</span><span class='op'>&gt;</span> {
