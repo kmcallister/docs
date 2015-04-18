@@ -1424,6 +1424,11 @@
 <span id="1382">1382</span>
 <span id="1383">1383</span>
 <span id="1384">1384</span>
+<span id="1385">1385</span>
+<span id="1386">1386</span>
+<span id="1387">1387</span>
+<span id="1388">1388</span>
+<span id="1389">1389</span>
 </pre><pre class='rust '>
 <span class='comment'>// Copyright 2014 The html5ever Project Developers. See the</span>
 <span class='comment'>// COPYRIGHT file at the top-level directory of this distribution.</span>
@@ -1752,8 +1757,8 @@
         }
     }
 
-    <span class='comment'>// Run the state machine for as long as we can.</span>
-    <span class='kw'>fn</span> <span class='ident'>run</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) {
+    <span class='doccomment'>/// Run the state machine for as long as we can.</span>
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>run</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) {
         <span class='kw'>if</span> <span class='self'>self</span>.<span class='ident'>opts</span>.<span class='ident'>profile</span> {
             <span class='kw'>loop</span> {
                 <span class='kw'>let</span> <span class='ident'>state</span> <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>state</span>;
@@ -1834,11 +1839,9 @@
         });
         <span class='self'>self</span>.<span class='ident'>process_token</span>(<span class='ident'>token</span>);
 
-        <span class='kw'>if</span> <span class='self'>self</span>.<span class='ident'>current_tag_kind</span> <span class='op'>==</span> <span class='ident'>StartTag</span> {
-            <span class='kw'>match</span> <span class='self'>self</span>.<span class='ident'>sink</span>.<span class='ident'>query_state_change</span>() {
-                <span class='prelude-val'>None</span> <span class='op'>=&gt;</span> (),
-                <span class='prelude-val'>Some</span>(<span class='ident'>s</span>) <span class='op'>=&gt;</span> <span class='self'>self</span>.<span class='ident'>state</span> <span class='op'>=</span> <span class='ident'>s</span>,
-            }
+        <span class='kw'>match</span> <span class='self'>self</span>.<span class='ident'>sink</span>.<span class='ident'>query_state_change</span>() {
+            <span class='prelude-val'>None</span> <span class='op'>=&gt;</span> (),
+            <span class='prelude-val'>Some</span>(<span class='ident'>s</span>) <span class='op'>=&gt;</span> <span class='self'>self</span>.<span class='ident'>state</span> <span class='op'>=</span> <span class='ident'>s</span>,
         }
     }
 
@@ -2075,6 +2078,13 @@
 
         <span class='macro'>h5e_debug</span><span class='macro'>!</span>(<span class='string'>&quot;processing in state {:?}&quot;</span>, <span class='self'>self</span>.<span class='ident'>state</span>);
         <span class='kw'>match</span> <span class='self'>self</span>.<span class='ident'>state</span> {
+            <span class='comment'>// Reachable only through `query_state_change`. The tree builder wants</span>
+            <span class='comment'>// the tokenizer to suspend processing.</span>
+            <span class='ident'>states</span>::<span class='ident'>Quiescent</span> <span class='op'>=&gt;</span> {
+                <span class='self'>self</span>.<span class='ident'>state</span> <span class='op'>=</span> <span class='ident'>states</span>::<span class='ident'>Data</span>;
+                <span class='kw'>return</span> <span class='boolval'>false</span>;
+            }
+
             <span class='comment'>//§ data-state</span>
             <span class='ident'>states</span>::<span class='ident'>Data</span> <span class='op'>=&gt;</span> <span class='kw'>loop</span> {
                 <span class='kw'>match</span> <span class='macro'>pop_except_from</span><span class='macro'>!</span>(<span class='self'>self</span>, <span class='macro'>small_char_set</span><span class='macro'>!</span>(<span class='string'>&#39;\r&#39;</span> <span class='string'>&#39;\0&#39;</span> <span class='string'>&#39;&amp;&#39;</span> <span class='string'>&#39;&lt;&#39;</span>)) {
@@ -2693,7 +2703,7 @@
         <span class='macro'>h5e_debug</span><span class='macro'>!</span>(<span class='string'>&quot;processing EOF in state {:?}&quot;</span>, <span class='self'>self</span>.<span class='ident'>state</span>);
         <span class='kw'>match</span> <span class='self'>self</span>.<span class='ident'>state</span> {
             <span class='ident'>states</span>::<span class='ident'>Data</span> <span class='op'>|</span> <span class='ident'>states</span>::<span class='ident'>RawData</span>(<span class='ident'>Rcdata</span>) <span class='op'>|</span> <span class='ident'>states</span>::<span class='ident'>RawData</span>(<span class='ident'>Rawtext</span>)
-            <span class='op'>|</span> <span class='ident'>states</span>::<span class='ident'>RawData</span>(<span class='ident'>ScriptData</span>) <span class='op'>|</span> <span class='ident'>states</span>::<span class='ident'>Plaintext</span>
+            <span class='op'>|</span> <span class='ident'>states</span>::<span class='ident'>RawData</span>(<span class='ident'>ScriptData</span>) <span class='op'>|</span> <span class='ident'>states</span>::<span class='ident'>Plaintext</span> <span class='op'>|</span> <span class='ident'>states</span>::<span class='ident'>Quiescent</span>
                 <span class='op'>=&gt;</span> <span class='macro'>go</span><span class='macro'>!</span>(<span class='self'>self</span>: <span class='ident'>eof</span>),
 
             <span class='ident'>states</span>::<span class='ident'>TagName</span> <span class='op'>|</span> <span class='ident'>states</span>::<span class='ident'>RawData</span>(<span class='ident'>ScriptDataEscaped</span>(_))

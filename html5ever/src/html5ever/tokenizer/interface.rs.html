@@ -266,7 +266,7 @@
     <span class='doccomment'>/// Process a token.</span>
     <span class='kw'>fn</span> <span class='ident'>process_token</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>token</span>: <span class='ident'>Token</span>);
 
-    <span class='doccomment'>/// The tokenizer will call this after emitting any start tag.</span>
+    <span class='doccomment'>/// The tokenizer will call this after emitting any tag.</span>
     <span class='doccomment'>/// This allows the tree builder to change the tokenizer&#39;s state.</span>
     <span class='doccomment'>/// By default no state changes occur.</span>
     <span class='kw'>fn</span> <span class='ident'>query_state_change</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>states</span>::<span class='ident'>State</span><span class='op'>&gt;</span> {
