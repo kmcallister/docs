@@ -416,6 +416,15 @@
 <span id="374">374</span>
 <span id="375">375</span>
 <span id="376">376</span>
+<span id="377">377</span>
+<span id="378">378</span>
+<span id="379">379</span>
+<span id="380">380</span>
+<span id="381">381</span>
+<span id="382">382</span>
+<span id="383">383</span>
+<span id="384">384</span>
+<span id="385">385</span>
 </pre><pre class='rust '>
 <span class='comment'>// Licensed under the Apache License, Version 2.0 &lt;LICENSE-APACHE or</span>
 <span class='comment'>// http://www.apache.org/licenses/LICENSE-2.0&gt; or the MIT license</span>
@@ -563,6 +572,7 @@
         <span class='kw'>if</span> <span class='self'>self</span>.<span class='ident'>need</span> <span class='op'>&gt;</span> <span class='number'>0</span> {
             <span class='macro'>debug_assert</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>pfx</span>.<span class='ident'>len</span>() <span class='op'>!=</span> <span class='number'>0</span>);
             <span class='self'>self</span>.<span class='ident'>sink</span>.<span class='ident'>error</span>(<span class='ident'>Cow</span>::<span class='ident'>Borrowed</span>(<span class='string'>&quot;incomplete byte sequence at end of stream&quot;</span>));
+            <span class='self'>self</span>.<span class='ident'>emit_char</span>(<span class='string'>&#39;\u{fffd}&#39;</span>);
         }
         <span class='self'>self</span>.<span class='ident'>sink</span>.<span class='ident'>finish</span>();
     }
@@ -685,7 +695,6 @@
         <span class='ident'>validator</span>.<span class='ident'>finish</span>();
 
         <span class='kw'>let</span> <span class='ident'>Accumulate</span> { <span class='ident'>tendrils</span>, <span class='ident'>errors</span> } <span class='op'>=</span> <span class='ident'>validator</span>.<span class='ident'>into_sink</span>();
-        <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;{:?} {:?}&quot;</span>, <span class='ident'>tendrils</span>, <span class='ident'>errors</span>);
         <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>expected</span>.<span class='ident'>len</span>(), <span class='ident'>tendrils</span>.<span class='ident'>len</span>());
         <span class='kw'>for</span> (<span class='kw-2'>&amp;</span><span class='ident'>e</span>, <span class='ident'>t</span>) <span class='kw'>in</span> <span class='ident'>expected</span>.<span class='ident'>iter</span>().<span class='ident'>zip</span>(<span class='ident'>tendrils</span>.<span class='ident'>iter</span>()) {
             <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>e</span>, <span class='kw-2'>&amp;</span><span class='op'>*</span><span class='op'>*</span><span class='ident'>t</span>);
@@ -718,6 +727,10 @@
             <span class='kw-2'>&amp;</span>[<span class='string'>&quot;ő&quot;</span>, <span class='string'>&quot;ő&quot;</span>, <span class='string'>&quot;ő&quot;</span>], <span class='number'>0</span>);
         <span class='ident'>check_validate</span>(<span class='kw-2'>&amp;</span>[<span class='string'>b&quot;\xC5&quot;</span>, <span class='string'>b&quot;\x91\xff&quot;</span>, <span class='string'>b&quot;\x91\xC5&quot;</span>, <span class='string'>b&quot;\x91&quot;</span>],
             <span class='kw-2'>&amp;</span>[<span class='string'>&quot;ő&quot;</span>, <span class='string'>&quot;\u{fffd}&quot;</span>, <span class='string'>&quot;\u{fffd}&quot;</span>, <span class='string'>&quot;ő&quot;</span>], <span class='number'>2</span>);
+
+        <span class='comment'>// incomplete char at end of input</span>
+        <span class='ident'>check_validate</span>(<span class='kw-2'>&amp;</span>[<span class='string'>b&quot;\xC0&quot;</span>], <span class='kw-2'>&amp;</span>[<span class='string'>&quot;\u{fffd}&quot;</span>], <span class='number'>1</span>);
+        <span class='ident'>check_validate</span>(<span class='kw-2'>&amp;</span>[<span class='string'>b&quot;\xEA\x99&quot;</span>], <span class='kw-2'>&amp;</span>[<span class='string'>&quot;\u{fffd}&quot;</span>], <span class='number'>1</span>);
     }
 
     <span class='kw'>fn</span> <span class='ident'>check_decode</span>(<span class='ident'>enc</span>: <span class='ident'>EncodingRef</span>, <span class='ident'>input</span>: <span class='kw-2'>&amp;</span>[<span class='kw-2'>&amp;</span>[<span class='ident'>u8</span>]], <span class='ident'>expected</span>: <span class='kw-2'>&amp;</span><span class='ident'>str</span>, <span class='ident'>errs</span>: <span class='ident'>usize</span>) {
@@ -769,6 +782,10 @@
             <span class='string'>&quot;xy\u{fffd}\u{fffd}\u{fffd}\u{fffd}z&quot;</span>, <span class='number'>4</span>);
         <span class='ident'>check_decode</span>(<span class='ident'>enc</span>::<span class='ident'>UTF_8</span>, <span class='kw-2'>&amp;</span>[<span class='string'>b&quot;xy\xEA\x99&quot;</span>, <span class='string'>b&quot;\xFFz&quot;</span>],
             <span class='string'>&quot;xy\u{fffd}\u{fffd}z&quot;</span>, <span class='number'>2</span>);
+
+        <span class='comment'>// incomplete char at end of input</span>
+        <span class='ident'>check_decode</span>(<span class='ident'>enc</span>::<span class='ident'>UTF_8</span>, <span class='kw-2'>&amp;</span>[<span class='string'>b&quot;\xC0&quot;</span>], <span class='string'>&quot;\u{fffd}&quot;</span>, <span class='number'>1</span>);
+        <span class='ident'>check_decode</span>(<span class='ident'>enc</span>::<span class='ident'>UTF_8</span>, <span class='kw-2'>&amp;</span>[<span class='string'>b&quot;\xEA\x99&quot;</span>], <span class='string'>&quot;\u{fffd}&quot;</span>, <span class='number'>1</span>);
     }
 
     <span class='attribute'>#[<span class='ident'>test</span>]</span>
@@ -788,6 +805,7 @@
         <span class='ident'>check_decode</span>(<span class='ident'>enc</span>::<span class='ident'>WINDOWS_949</span>, <span class='kw-2'>&amp;</span>[<span class='string'>b&quot;\xbe&quot;</span>, <span class='string'>b&quot;&quot;</span>, <span class='string'>b&quot;\xc8\xb3\xe7&quot;</span>], <span class='string'>&quot;안녕&quot;</span>, <span class='number'>0</span>);
         <span class='ident'>check_decode</span>(<span class='ident'>enc</span>::<span class='ident'>WINDOWS_949</span>, <span class='kw-2'>&amp;</span>[<span class='string'>b&quot;\xbe\xc8\xb3\xe7\xc7\xcf\xbc\xbc\xbf\xe4&quot;</span>],
             <span class='string'>&quot;안녕하세요&quot;</span>, <span class='number'>0</span>);
+        <span class='ident'>check_decode</span>(<span class='ident'>enc</span>::<span class='ident'>WINDOWS_949</span>, <span class='kw-2'>&amp;</span>[<span class='string'>b&quot;\xbe\xc8\xb3\xe7\xc7&quot;</span>], <span class='string'>&quot;안녕\u{fffd}&quot;</span>, <span class='number'>1</span>);
 
         <span class='ident'>check_decode</span>(<span class='ident'>enc</span>::<span class='ident'>WINDOWS_949</span>, <span class='kw-2'>&amp;</span>[<span class='string'>b&quot;\xbe&quot;</span>, <span class='string'>b&quot;&quot;</span>, <span class='string'>b&quot;\xc8\xb3&quot;</span>], <span class='string'>&quot;안\u{fffd}&quot;</span>, <span class='number'>1</span>);
         <span class='ident'>check_decode</span>(<span class='ident'>enc</span>::<span class='ident'>WINDOWS_949</span>, <span class='kw-2'>&amp;</span>[<span class='string'>b&quot;\xbe\x28\xb3\xe7&quot;</span>], <span class='string'>&quot;\u{fffd}(녕&quot;</span>, <span class='number'>1</span>);

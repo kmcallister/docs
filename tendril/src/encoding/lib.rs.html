@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/encoding-0.2.29/src/lib.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/encoding-0.2.32/src/lib.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>lib.rs.html -- source</title>
@@ -316,8 +316,6 @@
 <span id="274">274</span>
 <span id="275">275</span>
 <span id="276">276</span>
-<span id="277">277</span>
-<span id="278">278</span>
 </pre><pre class='rust '>
 <span class='comment'>// This is a part of rust-encoding.</span>
 <span class='comment'>// Copyright (c) 2013-2015, Kang Seonghoon.</span>
@@ -325,7 +323,7 @@
 
 <span class='doccomment'>/*!
 
-# Encoding 0.2.29
+# Encoding 0.2.32
 
 Character encoding support for Rust. (also known as `rust-encoding`)
 It is based on [WHATWG Encoding Standard](http://encoding.spec.whatwg.org/),
@@ -344,10 +342,10 @@ Or in the case you are using Rust 1.0 beta, pin the exact version:
 
 ```toml
 [dependencies]
-encoding = &quot;=0.2.28&quot;
+encoding = &quot;=0.2.32&quot;
 ```
 
-And this in your crate root:
+Then put this in your crate root:
 
 ```rust
 extern crate encoding;
@@ -515,9 +513,12 @@ Encoding covers all encodings specified by WHATWG Encoding Standard and some mor
     * EUC-JP and Windows code page 932 (`shift_jis`,
       since it&#39;s the most widespread extension to Shift_JIS)
     * ISO-2022-JP with asymmetric JIS X 0212 support
+      (Note: this is not yet up to date to the current standard)
+    * GBK
     * GB 18030
-    * HZ
     * Big5-2003 with HKSCS-2008 extensions
+* Encodings that were originally specified by WHATWG Encoding Standard:
+    * HZ
 * ISO 8859-1 (distinct from Windows code page 1252)
 
 Parenthesized names refer to the encoding&#39;s primary name assigned by WHATWG Encoding Standard.
@@ -546,17 +547,12 @@ Whenever in doubt, look at the source code and specifications for detailed expla
                       <span class='ident'>EncoderTrapFunc</span>, <span class='ident'>DecoderTrapFunc</span>, <span class='ident'>DecoderTrap</span>,
                       <span class='ident'>EncoderTrap</span>, <span class='ident'>decode</span>}; <span class='comment'>// reexport</span>
 
-<span class='comment'>// XXX gah rust-lang/rust#15702</span>
-<span class='attribute'>#[<span class='ident'>deprecated</span> <span class='op'>=</span> <span class='string'>&quot;use encoding::RawEncoder instead&quot;</span>]</span> <span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>types</span>::<span class='ident'>RawEncoder</span> <span class='kw'>as</span> <span class='ident'>Encoder</span>;
-<span class='attribute'>#[<span class='ident'>deprecated</span> <span class='op'>=</span> <span class='string'>&quot;use encoding::RawDecoder instead&quot;</span>]</span> <span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>types</span>::<span class='ident'>RawDecoder</span> <span class='kw'>as</span> <span class='ident'>Decoder</span>;
-
 <span class='attribute'>#[<span class='ident'>macro_use</span>]</span> <span class='kw'>mod</span> <span class='ident'>util</span>;
 <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>test</span>)]</span> <span class='attribute'>#[<span class='ident'>macro_use</span>]</span> <span class='kw'>mod</span> <span class='ident'>testutils</span>;
 
 <span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>types</span>;
 
 <span class='doccomment'>/// Codec implementations.</span>
-<span class='attribute'>#[<span class='ident'>unstable</span>]</span>
 <span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>codec</span> {
     <span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>error</span>;
     <span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>ascii</span>;
