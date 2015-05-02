@@ -171,9 +171,6 @@
 <span id="129">129</span>
 <span id="130">130</span>
 <span id="131">131</span>
-<span id="132">132</span>
-<span id="133">133</span>
-<span id="134">134</span>
 </pre><pre class='rust '>
 <span class='comment'>// Copyright 2014 The Servo Project Developers. See the</span>
 <span class='comment'>// COPYRIGHT file at the top-level directory of this distribution.</span>
@@ -196,9 +193,6 @@
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>ascii</span>::<span class='ident'>AsciiExt</span>;
 
 <span class='kw'>mod</span> <span class='ident'>data</span>;
-
-<span class='attribute'>#[<span class='ident'>path</span><span class='op'>=</span><span class='string'>&quot;../../../shared/repr.rs&quot;</span>]</span>
-<span class='kw'>mod</span> <span class='ident'>repr</span>;
 
 <span class='comment'>// Build a PhfOrderedSet of static atoms.</span>
 <span class='comment'>// Takes no arguments.</span>
@@ -251,7 +245,7 @@
         <span class='prelude-val'>None</span> <span class='op'>=&gt;</span> <span class='kw'>return</span> <span class='prelude-val'>None</span>,
     };
 
-    <span class='kw'>let</span> <span class='ident'>data</span> <span class='op'>=</span> <span class='ident'>repr</span>::<span class='ident'>pack_static</span>(<span class='op'>*</span><span class='ident'>i</span> <span class='kw'>as</span> <span class='ident'>u32</span>);
+    <span class='kw'>let</span> <span class='ident'>data</span> <span class='op'>=</span> ::<span class='ident'>string_cache_shared</span>::<span class='ident'>pack_static</span>(<span class='op'>*</span><span class='ident'>i</span> <span class='kw'>as</span> <span class='ident'>u32</span>);
 
     <span class='prelude-val'>Some</span>(<span class='ident'>AtomResult</span> {
         <span class='ident'>expr</span>: <span class='macro'>quote_expr</span><span class='macro'>!</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='op'>*</span><span class='ident'>cx</span>, ::<span class='ident'>string_cache</span>::<span class='ident'>atom</span>::<span class='ident'>Atom</span> { <span class='ident'>data</span>: <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>data</span> }),

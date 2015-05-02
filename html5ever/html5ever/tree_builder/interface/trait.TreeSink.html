@@ -42,11 +42,10 @@
 
     <section id='main' class="content trait">
 <h1 class='fqn'><span class='in-band'>Trait <a href='../../index.html'>html5ever</a>::<wbr><a href='../index.html'>tree_builder</a>::<wbr><a href='index.html'>interface</a>::<wbr><a class='trait' href=''>TreeSink</a></span><span class='out-of-band'><span id='render-detail'>
-            <a id="toggle-all-docs" href="#" title="collapse all docs">[-]</a>
+            <a id="toggle-all-docs" href="#" title="collapse all docs">[&minus;]</a>
         </span><a id='src-79907' class='srclink' href='../../../src/html5ever/tree_builder/interface.rs.html#49-119' title='goto source code'>[src]</a></span></h1>
 <pre class='rust trait'>pub trait TreeSink {
     type Handle: <a class='trait' href='http://doc.rust-lang.org/nightly/core/clone/trait.Clone.html' title='core::clone::Clone'>Clone</a>;
-
     fn <a href='#tymethod.parse_error' class='fnname'>parse_error</a>(&amp;mut self, msg: <a class='enum' href='http://doc.rust-lang.org/nightly/collections/borrow/enum.Cow.html' title='collections::borrow::Cow'>Cow</a>&lt;'static, <a href='http://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>&gt;);
     fn <a href='#tymethod.get_document' class='fnname'>get_document</a>(&amp;mut self) -&gt; Self::<a class='trait' href='../../../html5ever/tree_builder/interface/trait.TreeSink.html' title='html5ever::tree_builder::interface::TreeSink'>Handle</a>;
     fn <a href='#tymethod.same_node' class='fnname'>same_node</a>(&amp;self, x: Self::<a class='trait' href='../../../html5ever/tree_builder/interface/trait.TreeSink.html' title='html5ever::tree_builder::interface::TreeSink'>Handle</a>, y: Self::<a class='trait' href='../../../html5ever/tree_builder/interface/trait.TreeSink.html' title='html5ever::tree_builder::interface::TreeSink'>Handle</a>) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a>;

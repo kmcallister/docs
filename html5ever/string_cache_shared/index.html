@@ -4,12 +4,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="API documentation for the Rust `repr` mod in crate `string_cache`.">
-    <meta name="keywords" content="rust, rustlang, rust-lang, repr">
+    <meta name="description" content="API documentation for the Rust `string_cache_shared` crate.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, string_cache_shared">
 
-    <title>string_cache::atom::repr - Rust</title>
+    <title>string_cache_shared - Rust</title>
 
-    <link rel="stylesheet" type="text/css" href="../../../main.css">
+    <link rel="stylesheet" type="text/css" href="../main.css">
 
     
     
@@ -26,7 +26,7 @@
 
     <section class="sidebar">
         
-        <p class='location'><a href='../../index.html'>string_cache</a>::<wbr><a href='../index.html'>atom</a></p><script>window.sidebarCurrent = {name: 'repr', ty: 'mod', relpath: '../'};</script><script defer src="../sidebar-items.js"></script>
+        <p class='location'></p><script>window.sidebarCurrent = {name: 'string_cache_shared', ty: 'mod', relpath: '../'};</script>
     </section>
 
     <nav class="sub">
@@ -41,18 +41,18 @@
     </nav>
 
     <section id='main' class="content mod">
-<h1 class='fqn'><span class='in-band'>Module <a href='../../index.html'>string_cache</a>::<wbr><a href='../index.html'>atom</a>::<wbr><a class='mod' href=''>repr</a></span><span class='out-of-band'><span id='render-detail'>
-            <a id="toggle-all-docs" href="#" title="collapse all docs">[-]</a>
-        </span><a id='src-36' class='srclink' href='../../../src/string_cache/atom/up/up/shared/repr.rs.html#10-129' title='goto source code'>[src]</a></span></h1>
+<h1 class='fqn'><span class='in-band'>Crate <a class='mod' href=''>string_cache_shared</a></span><span class='out-of-band'><span id='render-detail'>
+            <a id="toggle-all-docs" href="#" title="collapse all docs">[&minus;]</a>
+        </span><a id='src-0' class='srclink' href='../src/string_cache_shared/lib.rs.html#10-130' title='goto source code'>[src]</a></span></h1>
 <div class='docblock'><p>Details of the atom representation that need to be shared between
 the macros crate and the run-time library, in order to guarantee
 consistency.</p>
 </div><h2 id='reexports' class='section-header'><a href="#reexports">Reexports</a></h2>
-<table><tr><td><code>pub use self::UnpackedAtom::{<a class='enum' href='../../../string_cache/atom/repr/enum.UnpackedAtom.html' title='string_cache::atom::repr::UnpackedAtom'>Dynamic</a>, <a class='enum' href='../../../string_cache/atom/repr/enum.UnpackedAtom.html' title='string_cache::atom::repr::UnpackedAtom'>Inline</a>, <a class='enum' href='../../../string_cache/atom/repr/enum.UnpackedAtom.html' title='string_cache::atom::repr::UnpackedAtom'>Static</a>};</code></td></tr></table><h2 id='enums' class='section-header'><a href="#enums">Enums</a></h2>
+<table><tr><td><code>pub use self::UnpackedAtom::{<a class='enum' href='../string_cache_shared/enum.UnpackedAtom.html' title='string_cache_shared::UnpackedAtom'>Dynamic</a>, <a class='enum' href='../string_cache_shared/enum.UnpackedAtom.html' title='string_cache_shared::UnpackedAtom'>Inline</a>, <a class='enum' href='../string_cache_shared/enum.UnpackedAtom.html' title='string_cache_shared::UnpackedAtom'>Static</a>};</code></td></tr></table><h2 id='enums' class='section-header'><a href="#enums">Enums</a></h2>
 <table>
                     <tr class=' module-item'>
                         <td><a class='enum' href='enum.UnpackedAtom.html'
-                               title='string_cache::atom::repr::UnpackedAtom'>UnpackedAtom</a></td>
+                               title='string_cache_shared::UnpackedAtom'>UnpackedAtom</a></td>
                         <td class='docblock short'>
                              
                         </td>
@@ -61,7 +61,7 @@ consistency.</p>
 <table>
                     <tr class=' module-item'>
                         <td><a class='constant' href='constant.DYNAMIC_TAG.html'
-                               title='string_cache::atom::repr::DYNAMIC_TAG'>DYNAMIC_TAG</a></td>
+                               title='string_cache_shared::DYNAMIC_TAG'>DYNAMIC_TAG</a></td>
                         <td class='docblock short'>
                              
                         </td>
@@ -69,7 +69,7 @@ consistency.</p>
                 
                     <tr class=' module-item'>
                         <td><a class='constant' href='constant.INLINE_TAG.html'
-                               title='string_cache::atom::repr::INLINE_TAG'>INLINE_TAG</a></td>
+                               title='string_cache_shared::INLINE_TAG'>INLINE_TAG</a></td>
                         <td class='docblock short'>
                              
                         </td>
@@ -77,7 +77,7 @@ consistency.</p>
                 
                     <tr class=' module-item'>
                         <td><a class='constant' href='constant.MAX_INLINE_LEN.html'
-                               title='string_cache::atom::repr::MAX_INLINE_LEN'>MAX_INLINE_LEN</a></td>
+                               title='string_cache_shared::MAX_INLINE_LEN'>MAX_INLINE_LEN</a></td>
                         <td class='docblock short'>
                              
                         </td>
@@ -85,7 +85,7 @@ consistency.</p>
                 
                     <tr class=' module-item'>
                         <td><a class='constant' href='constant.STATIC_TAG.html'
-                               title='string_cache::atom::repr::STATIC_TAG'>STATIC_TAG</a></td>
+                               title='string_cache_shared::STATIC_TAG'>STATIC_TAG</a></td>
                         <td class='docblock short'>
                              
                         </td>
@@ -94,7 +94,7 @@ consistency.</p>
 <table>
                     <tr class=' module-item'>
                         <td><a class='fn' href='fn.from_packed_dynamic.html'
-                               title='string_cache::atom::repr::from_packed_dynamic'>from_packed_dynamic</a></td>
+                               title='string_cache_shared::from_packed_dynamic'>from_packed_dynamic</a></td>
                         <td class='docblock short'>
                              <p>Used for a fast path in Clone and Drop.</p>
 
@@ -103,7 +103,7 @@ consistency.</p>
                 
                     <tr class=' module-item'>
                         <td><a class='fn' href='fn.inline_orig_bytes.html'
-                               title='string_cache::atom::repr::inline_orig_bytes'>inline_orig_bytes</a></td>
+                               title='string_cache_shared::inline_orig_bytes'>inline_orig_bytes</a></td>
                         <td class='docblock short'>
                              <p>For as_slice on inline atoms, we need a pointer into the original
 string contents.</p>
@@ -113,7 +113,7 @@ string contents.</p>
                 
                     <tr class=' module-item'>
                         <td><a class='fn' href='fn.pack_static.html'
-                               title='string_cache::atom::repr::pack_static'>pack_static</a></td>
+                               title='string_cache_shared::pack_static'>pack_static</a></td>
                         <td class='docblock short'>
                              
                         </td>
@@ -157,13 +157,13 @@ string contents.</p>
     
 
     <script>
-        window.rootPath = "../../../";
-        window.currentCrate = "string_cache";
+        window.rootPath = "../";
+        window.currentCrate = "string_cache_shared";
         window.playgroundUrl = "";
     </script>
-    <script src="../../../jquery.js"></script>
-    <script src="../../../main.js"></script>
+    <script src="../jquery.js"></script>
+    <script src="../main.js"></script>
     
-    <script async src="../../../search-index.js"></script>
+    <script async src="../search-index.js"></script>
 </body>
 </html>
