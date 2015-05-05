@@ -4,10 +4,10 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="API documentation for the Rust `SliceExt` trait in crate `tendril`.">
-    <meta name="keywords" content="rust, rustlang, rust-lang, SliceExt">
+    <meta name="description" content="API documentation for the Rust `ReadExt` trait in crate `tendril`.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, ReadExt">
 
-    <title>tendril::SliceExt - Rust</title>
+    <title>tendril::ReadExt - Rust</title>
 
     <link rel="stylesheet" type="text/css" href="../main.css">
 
@@ -26,7 +26,7 @@
 
     <section class="sidebar">
         
-        <p class='location'><a href='index.html'>tendril</a></p><script>window.sidebarCurrent = {name: 'SliceExt', ty: 'trait', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+        <p class='location'><a href='index.html'>tendril</a></p><script>window.sidebarCurrent = {name: 'ReadExt', ty: 'trait', relpath: ''};</script><script defer src="sidebar-items.js"></script>
     </section>
 
     <nav class="sub">
@@ -41,23 +41,21 @@
     </nav>
 
     <section id='main' class="content trait">
-<h1 class='fqn'><span class='in-band'>Trait <a href='index.html'>tendril</a>::<wbr><a class='trait' href=''>SliceExt</a></span><span class='out-of-band'><span id='render-detail'>
+<h1 class='fqn'><span class='in-band'>Trait <a href='index.html'>tendril</a>::<wbr><a class='trait' href=''>ReadExt</a></span><span class='out-of-band'><span id='render-detail'>
             <a id="toggle-all-docs" href="#" title="collapse all docs">[&minus;]</a>
-        </span><a id='src-5232' class='srclink' href='../src/tendril/tendril.rs.html#821-827' title='goto source code'>[src]</a></span></h1>
-<pre class='rust trait'>pub trait SliceExt: <a class='trait' href='../tendril/fmt/trait.Slice.html' title='tendril::fmt::Slice'>Slice</a> {
-    fn <a href='#method.to_tendril' class='fnname'>to_tendril</a>(&amp;self) -&gt; <a class='struct' href='../tendril/struct.Tendril.html' title='tendril::Tendril'>Tendril</a>&lt;Self::<a class='trait' href='../tendril/trait.SliceExt.html' title='tendril::SliceExt'>Format</a>&gt; { ... }
-}</pre><div class='docblock'><p><code>Tendril</code>-related methods for Rust slices.</p>
+        </span><a id='src-5492' class='srclink' href='../src/tendril/tendril.rs.html#904-906' title='goto source code'>[src]</a></span></h1>
+<pre class='rust trait'>pub trait ReadExt: <a class='trait' href='http://doc.rust-lang.org/nightly/std/io/trait.Read.html' title='std::io::Read'>Read</a> {
+    fn <a href='#tymethod.read_to_tendril' class='fnname'>read_to_tendril</a>(&amp;mut self, buf: &amp;mut <a class='struct' href='../tendril/struct.Tendril.html' title='tendril::Tendril'>Tendril</a>&lt;<a class='struct' href='../tendril/fmt/struct.Bytes.html' title='tendril::fmt::Bytes'>Bytes</a>&gt;) -&gt; <a class='type' href='http://doc.rust-lang.org/nightly/std/io/error/type.Result.html' title='std::io::error::Result'>Result</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>&gt;;
+}</pre><div class='docblock'><p>Extension trait for <code>io::Read</code>.</p>
 </div>
-            <h2 id='provided-methods'>Provided Methods</h2>
+            <h2 id='required-methods'>Required Methods</h2>
             <div class='methods'>
-        <h3 id='method.to_tendril' class='method stab '><code>fn <a href='#method.to_tendril' class='fnname'>to_tendril</a>(&amp;self) -&gt; <a class='struct' href='../tendril/struct.Tendril.html' title='tendril::Tendril'>Tendril</a>&lt;Self::<a class='trait' href='../tendril/trait.SliceExt.html' title='tendril::SliceExt'>Format</a>&gt;</code></h3><div class='docblock'><p>Make a <code>Tendril</code> from this slice.</p>
-</div></div>
+        <h3 id='tymethod.read_to_tendril' class='method stab '><code>fn <a href='#tymethod.read_to_tendril' class='fnname'>read_to_tendril</a>(&amp;mut self, buf: &amp;mut <a class='struct' href='../tendril/struct.Tendril.html' title='tendril::Tendril'>Tendril</a>&lt;<a class='struct' href='../tendril/fmt/struct.Bytes.html' title='tendril::fmt::Bytes'>Bytes</a>&gt;) -&gt; <a class='type' href='http://doc.rust-lang.org/nightly/std/io/error/type.Result.html' title='std::io::error::Result'>Result</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>&gt;</code></h3></div>
         <h2 id='implementors'>Implementors</h2>
         <ul class='item-list' id='implementors-list'>
-    <li><code>impl <a class='trait' href='../tendril/trait.SliceExt.html' title='tendril::SliceExt'>SliceExt</a> for <a href='http://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a></code></li>
-<li><code>impl <a class='trait' href='../tendril/trait.SliceExt.html' title='tendril::SliceExt'>SliceExt</a> for <a href='http://doc.rust-lang.org/nightly/std/primitive.slice.html'>[<a href='http://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a>]</a></code></li>
+    <li><code>impl&lt;T&gt; <a class='trait' href='../tendril/trait.ReadExt.html' title='tendril::ReadExt'>ReadExt</a> for T <span class='where'>where T: <a class='trait' href='http://doc.rust-lang.org/nightly/std/io/trait.Read.html' title='std::io::Read'>Read</a></span></code></li>
 </ul><script type="text/javascript" async
-                              src="../implementors/tendril/trait.SliceExt.js">
+                              src="../implementors/tendril/trait.ReadExt.js">
                       </script></section>
     <section id='search' class="content hidden"></section>
 
