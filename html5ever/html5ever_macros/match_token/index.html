@@ -50,7 +50,7 @@
 in <code>src/tree_builder/mod.rs</code>.</p>
 
 <h2 id="example" class='section-header'><a
-                           href="#example">Example</a></h2><pre id='rust-example-rendered' class='rust '>
+                           href="#example">Example</a></h2><pre class='rust rust-example-rendered'>
 <span class='macro'>match_token</span><span class='macro'>!</span>(<span class='ident'>token</span> {
     <span class='ident'>CommentToken</span>(<span class='ident'>text</span>) <span class='op'>=&gt;</span> <span class='number'>1</span>,
 
@@ -92,12 +92,12 @@ the usual meaning.</p>
 <p>A sequence of named tags matches any of those tags.  A single sequence can
 contain both open and close tags.  If present, the <code>name @</code> binding binds (by
 move) the <code>Tag</code> struct, not the outer <code>Token</code>.  That is, a match arm like</p>
-<pre id='rust-example-rendered' class='rust '>
+<pre class='rust rust-example-rendered'>
 <span class='ident'>tag</span> <span class='kw-2'>@</span> <span class='op'>&lt;</span><span class='ident'>html</span><span class='op'>&gt;</span> <span class='op'>&lt;</span><span class='ident'>head</span><span class='op'>&gt;</span> <span class='op'>=&gt;</span> ...
 </pre>
 
 <p>expands to something like</p>
-<pre id='rust-example-rendered' class='rust '>
+<pre class='rust rust-example-rendered'>
 <span class='ident'>TagToken</span>(<span class='ident'>tag</span> <span class='kw-2'>@</span> <span class='ident'>Tag</span> { <span class='ident'>name</span>: <span class='macro'>atom</span><span class='macro'>!</span>(<span class='ident'>html</span>), <span class='ident'>kind</span>: <span class='ident'>StartTag</span> })
 <span class='op'>|</span> <span class='ident'>TagToken</span>(<span class='ident'>tag</span> <span class='kw-2'>@</span> <span class='ident'>Tag</span> { <span class='ident'>name</span>: <span class='macro'>atom</span><span class='macro'>!</span>(<span class='ident'>head</span>), <span class='ident'>kind</span>: <span class='ident'>StartTag</span> }) <span class='op'>=&gt;</span> ...
 </pre>
