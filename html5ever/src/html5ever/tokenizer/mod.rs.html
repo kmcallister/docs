@@ -2736,38 +2736,38 @@
     <span class='kw'>fn</span> <span class='ident'>push_to_None_gives_singleton</span>() {
         <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>s</span>: <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>String</span><span class='op'>&gt;</span> <span class='op'>=</span> <span class='prelude-val'>None</span>;
         <span class='ident'>option_push</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>s</span>, <span class='string'>&#39;x&#39;</span>);
-        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>s</span>, <span class='prelude-val'>Some</span>(<span class='ident'>String</span>::<span class='ident'>from_str</span>(<span class='string'>&quot;x&quot;</span>)));
+        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>s</span>, <span class='prelude-val'>Some</span>(<span class='ident'>String</span>::<span class='ident'>from</span>(<span class='string'>&quot;x&quot;</span>)));
     }
 
     <span class='attribute'>#[<span class='ident'>test</span>]</span>
     <span class='kw'>fn</span> <span class='ident'>push_to_empty_appends</span>() {
         <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>s</span>: <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>String</span><span class='op'>&gt;</span> <span class='op'>=</span> <span class='prelude-val'>Some</span>(<span class='ident'>String</span>::<span class='ident'>new</span>());
         <span class='ident'>option_push</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>s</span>, <span class='string'>&#39;x&#39;</span>);
-        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>s</span>, <span class='prelude-val'>Some</span>(<span class='ident'>String</span>::<span class='ident'>from_str</span>(<span class='string'>&quot;x&quot;</span>)));
+        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>s</span>, <span class='prelude-val'>Some</span>(<span class='ident'>String</span>::<span class='ident'>from</span>(<span class='string'>&quot;x&quot;</span>)));
     }
 
     <span class='attribute'>#[<span class='ident'>test</span>]</span>
     <span class='kw'>fn</span> <span class='ident'>push_to_nonempty_appends</span>() {
-        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>s</span>: <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>String</span><span class='op'>&gt;</span> <span class='op'>=</span> <span class='prelude-val'>Some</span>(<span class='ident'>String</span>::<span class='ident'>from_str</span>(<span class='string'>&quot;y&quot;</span>));
+        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>s</span>: <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>String</span><span class='op'>&gt;</span> <span class='op'>=</span> <span class='prelude-val'>Some</span>(<span class='ident'>String</span>::<span class='ident'>from</span>(<span class='string'>&quot;y&quot;</span>));
         <span class='ident'>option_push</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>s</span>, <span class='string'>&#39;x&#39;</span>);
-        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>s</span>, <span class='prelude-val'>Some</span>(<span class='ident'>String</span>::<span class='ident'>from_str</span>(<span class='string'>&quot;yx&quot;</span>)));
+        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>s</span>, <span class='prelude-val'>Some</span>(<span class='ident'>String</span>::<span class='ident'>from</span>(<span class='string'>&quot;yx&quot;</span>)));
     }
 
     <span class='attribute'>#[<span class='ident'>test</span>]</span>
     <span class='kw'>fn</span> <span class='ident'>append_appends</span>() {
-        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>s</span> <span class='op'>=</span> <span class='ident'>String</span>::<span class='ident'>from_str</span>(<span class='string'>&quot;foo&quot;</span>);
-        <span class='ident'>append_strings</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>s</span>, <span class='ident'>String</span>::<span class='ident'>from_str</span>(<span class='string'>&quot;bar&quot;</span>));
-        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>s</span>, <span class='ident'>String</span>::<span class='ident'>from_str</span>(<span class='string'>&quot;foobar&quot;</span>));
+        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>s</span> <span class='op'>=</span> <span class='ident'>String</span>::<span class='ident'>from</span>(<span class='string'>&quot;foo&quot;</span>);
+        <span class='ident'>append_strings</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>s</span>, <span class='ident'>String</span>::<span class='ident'>from</span>(<span class='string'>&quot;bar&quot;</span>));
+        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>s</span>, <span class='ident'>String</span>::<span class='ident'>from</span>(<span class='string'>&quot;foobar&quot;</span>));
     }
 
     <span class='attribute'>#[<span class='ident'>test</span>]</span>
     <span class='kw'>fn</span> <span class='ident'>append_to_empty_does_not_copy</span>() {
-        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>lhs</span>: <span class='ident'>String</span> <span class='op'>=</span> <span class='ident'>String</span>::<span class='ident'>from_str</span>(<span class='string'>&quot;&quot;</span>);
+        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>lhs</span>: <span class='ident'>String</span> <span class='op'>=</span> <span class='ident'>String</span>::<span class='ident'>from</span>(<span class='string'>&quot;&quot;</span>);
         <span class='kw'>let</span> <span class='ident'>rhs</span>: <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>u8</span><span class='op'>&gt;</span> <span class='op'>=</span> <span class='macro'>vec</span><span class='macro'>!</span>[<span class='string'>b&#39;f&#39;</span>, <span class='string'>b&#39;o&#39;</span>, <span class='string'>b&#39;o&#39;</span>];
         <span class='kw'>let</span> <span class='ident'>ptr_old</span> <span class='op'>=</span> <span class='ident'>rhs</span>[<span class='number'>0</span>] <span class='kw'>as</span> <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>u8</span>;
 
         <span class='ident'>append_strings</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>lhs</span>, <span class='ident'>String</span>::<span class='ident'>from_utf8</span>(<span class='ident'>rhs</span>).<span class='ident'>unwrap</span>());
-        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>lhs</span>, <span class='ident'>String</span>::<span class='ident'>from_str</span>(<span class='string'>&quot;foo&quot;</span>));
+        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>lhs</span>, <span class='ident'>String</span>::<span class='ident'>from</span>(<span class='string'>&quot;foo&quot;</span>));
 
         <span class='kw'>let</span> <span class='ident'>ptr_new</span> <span class='op'>=</span> <span class='ident'>lhs</span>.<span class='ident'>into_bytes</span>()[<span class='number'>0</span>] <span class='kw'>as</span> <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>u8</span>;
         <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>ptr_old</span>, <span class='ident'>ptr_new</span>);

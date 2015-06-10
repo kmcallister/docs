@@ -826,11 +826,11 @@
 
                     <span class='ident'>token</span> <span class='op'>=</span> <span class='ident'>CharacterTokens</span>(
                         <span class='kw'>if</span> <span class='ident'>is_ws</span> { <span class='ident'>Whitespace</span> } <span class='kw'>else</span> { <span class='ident'>NotWhitespace</span> },
-                        <span class='ident'>String</span>::<span class='ident'>from_str</span>(<span class='kw-2'>&amp;</span><span class='ident'>buf</span>[..<span class='ident'>len</span>]));
+                        <span class='ident'>String</span>::<span class='ident'>from</span>(<span class='kw-2'>&amp;</span><span class='ident'>buf</span>[..<span class='ident'>len</span>]));
 
                     <span class='kw'>if</span> <span class='ident'>len</span> <span class='op'>&lt;</span> <span class='ident'>buf</span>.<span class='ident'>len</span>() {
                         <span class='ident'>more_tokens</span>.<span class='ident'>push_back</span>(
-                            <span class='ident'>CharacterTokens</span>(<span class='ident'>NotSplit</span>, <span class='ident'>String</span>::<span class='ident'>from_str</span>(<span class='kw-2'>&amp;</span><span class='ident'>buf</span>[<span class='ident'>len</span>..])));
+                            <span class='ident'>CharacterTokens</span>(<span class='ident'>NotSplit</span>, <span class='ident'>String</span>::<span class='ident'>from</span>(<span class='kw-2'>&amp;</span><span class='ident'>buf</span>[<span class='ident'>len</span>..])));
                     }
                 }
             }

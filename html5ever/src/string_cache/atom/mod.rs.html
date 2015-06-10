@@ -630,7 +630,7 @@
             <span class='ident'>next_in_bucket</span>: <span class='ident'>next</span>,
             <span class='ident'>hash</span>: <span class='ident'>hash</span>,
             <span class='ident'>ref_count</span>: <span class='ident'>AtomicIsize</span>::<span class='ident'>new</span>(<span class='number'>1</span>),
-            <span class='ident'>string</span>: <span class='ident'>String</span>::<span class='ident'>from_str</span>(<span class='ident'>string_to_add</span>),
+            <span class='ident'>string</span>: <span class='ident'>String</span>::<span class='ident'>from</span>(<span class='ident'>string_to_add</span>),
         }
     }
 }
@@ -680,7 +680,7 @@
                             <span class='ident'>StringCacheEntry</span>::<span class='ident'>new</span>(<span class='self'>self</span>.<span class='ident'>buckets</span>[<span class='ident'>bucket_index</span>], <span class='ident'>hash</span>, <span class='ident'>string_to_add</span>));
             }
             <span class='self'>self</span>.<span class='ident'>buckets</span>[<span class='ident'>bucket_index</span>] <span class='op'>=</span> <span class='ident'>ptr</span>;
-            <span class='macro'>log</span><span class='macro'>!</span>(<span class='ident'>Event</span>::<span class='ident'>Insert</span>(<span class='ident'>ptr</span> <span class='kw'>as</span> <span class='ident'>u64</span>, <span class='ident'>String</span>::<span class='ident'>from_str</span>(<span class='ident'>string_to_add</span>)));
+            <span class='macro'>log</span><span class='macro'>!</span>(<span class='ident'>Event</span>::<span class='ident'>Insert</span>(<span class='ident'>ptr</span> <span class='kw'>as</span> <span class='ident'>u64</span>, <span class='ident'>String</span>::<span class='ident'>from</span>(<span class='ident'>string_to_add</span>)));
         }
 
         <span class='macro'>debug_assert</span><span class='macro'>!</span>(<span class='ident'>ptr</span> <span class='op'>!=</span> <span class='ident'>ptr</span>::<span class='ident'>null_mut</span>());
