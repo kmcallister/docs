@@ -119,7 +119,7 @@ boundaries.</p>
 <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='string'>&quot;bors&quot;</span>.<span class='ident'>as_bytes</span>(), <span class='string'>b&quot;bors&quot;</span>);
 </pre>
 </div><h4 id='method.as_ptr' class='method'><code>fn <a href='#method.as_ptr' class='fnname'>as_ptr</a>(&amp;self) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.pointer.html'>*const <a href='http://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a></a></code></h4>
-<div class='docblock'><p>Returns an unsafe pointer to the <code>&amp;str</code>&#39;s buffer.</p>
+<div class='docblock'><p>Returns a raw pointer to the <code>&amp;str</code>&#39;s buffer.</p>
 
 <p>The caller must ensure that the string outlives this pointer, and
 that it is not
@@ -310,6 +310,28 @@ beyond the character that was shifted.</p>
 
 <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>c</span>, <span class='string'>&#39;ö&#39;</span>);
 <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>s2</span>, <span class='string'>&quot;we 老虎 Léopard&quot;</span>);
+</pre>
+</div><h4 id='method.split_at' class='method'><code>fn <a href='#method.split_at' class='fnname'>split_at</a>(&amp;self, mid: <a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.tuple.html'>(&amp;<a href='http://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>, &amp;<a href='http://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>)</a></code></h4>
+<div class='stability'><em class='stab unstable'>Unstable</em></div><div class='docblock'><p>Divide one string slice into two at an index.</p>
+
+<p>The index <code>mid</code> is a byte offset from the start of the string
+that must be on a character boundary.</p>
+
+<p>Return slices <code>&amp;self[..mid]</code> and <code>&amp;self[mid..]</code>.</p>
+
+<h1 id="panics" class='section-header'><a
+                           href="#panics">Panics</a></h1>
+<p>Panics if <code>mid</code> is beyond the last character of the string,
+or if it is not on a character boundary.</p>
+
+<h1 id="examples" class='section-header'><a
+                           href="#examples">Examples</a></h1><pre class='rust rust-example-rendered'>
+<span class='kw'>let</span> <span class='ident'>s</span> <span class='op'>=</span> <span class='string'>&quot;Löwe 老虎 Léopard&quot;</span>;
+<span class='kw'>let</span> <span class='ident'>first_space</span> <span class='op'>=</span> <span class='ident'>s</span>.<span class='ident'>find</span>(<span class='string'>&#39; &#39;</span>).<span class='ident'>unwrap_or</span>(<span class='ident'>s</span>.<span class='ident'>len</span>());
+<span class='kw'>let</span> (<span class='ident'>a</span>, <span class='ident'>b</span>) <span class='op'>=</span> <span class='ident'>s</span>.<span class='ident'>split_at</span>(<span class='ident'>first_space</span>);
+
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>a</span>, <span class='string'>&quot;Löwe&quot;</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>b</span>, <span class='string'>&quot; 老虎 Léopard&quot;</span>);
 </pre>
 </div><h4 id='method.chars' class='method'><code>fn <a href='#method.chars' class='fnname'>chars</a>(&amp;self) -&gt; <a class='struct' href='http://doc.rust-lang.org/nightly/core/str/struct.Chars.html' title='core::str::Chars'>Chars</a></code></h4>
 <div class='docblock'><p>An iterator over the codepoints of <code>self</code>.</p>
@@ -557,9 +579,8 @@ or a closure that determines the split.</p>
 matched by a pattern.</p>
 
 <p>The pattern can be a simple <code>&amp;str</code>, <code>char</code>, or a closure that
-determines the split.
-Additional libraries might provide more complex patterns like
-regular expressions.</p>
+determines the split. Additional libraries might provide more complex
+patterns like regular expressions.</p>
 
 <h1 id="iterator-behavior" class='section-header'><a
                            href="#iterator-behavior">Iterator behavior</a></h1>
@@ -598,6 +619,29 @@ from a forward search, <code>rsplit()</code> can be used.</p>
 <pre class='rust rust-example-rendered'>
 <span class='kw'>let</span> <span class='ident'>v</span>: <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='kw-2'>&amp;</span><span class='ident'>str</span><span class='op'>&gt;</span> <span class='op'>=</span> <span class='string'>&quot;abc1defXghi&quot;</span>.<span class='ident'>split</span>(<span class='op'>|</span><span class='ident'>c</span><span class='op'>|</span> <span class='ident'>c</span> <span class='op'>==</span> <span class='string'>&#39;1&#39;</span> <span class='op'>||</span> <span class='ident'>c</span> <span class='op'>==</span> <span class='string'>&#39;X&#39;</span>).<span class='ident'>collect</span>();
 <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>v</span>, [<span class='string'>&quot;abc&quot;</span>, <span class='string'>&quot;def&quot;</span>, <span class='string'>&quot;ghi&quot;</span>]);
+</pre>
+
+<p>If a string contains multiple contiguous separators, you will end up
+with empty strings in the output:</p>
+<pre class='rust rust-example-rendered'>
+<span class='kw'>let</span> <span class='ident'>x</span> <span class='op'>=</span> <span class='string'>&quot;||||a||b|c&quot;</span>.<span class='ident'>to_string</span>();
+<span class='kw'>let</span> <span class='ident'>d</span>: <span class='ident'>Vec</span><span class='op'>&lt;</span>_<span class='op'>&gt;</span> <span class='op'>=</span> <span class='ident'>x</span>.<span class='ident'>split</span>(<span class='string'>&#39;|&#39;</span>).<span class='ident'>collect</span>();
+
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>d</span>, <span class='kw-2'>&amp;</span>[<span class='string'>&quot;&quot;</span>, <span class='string'>&quot;&quot;</span>, <span class='string'>&quot;&quot;</span>, <span class='string'>&quot;&quot;</span>, <span class='string'>&quot;a&quot;</span>, <span class='string'>&quot;&quot;</span>, <span class='string'>&quot;b&quot;</span>, <span class='string'>&quot;c&quot;</span>]);
+</pre>
+
+<p>This can lead to possibly surprising behavior when whitespace is used
+as the separator. This code is correct:</p>
+<pre class='rust rust-example-rendered'>
+<span class='kw'>let</span> <span class='ident'>x</span> <span class='op'>=</span> <span class='string'>&quot;    a  b c&quot;</span>.<span class='ident'>to_string</span>();
+<span class='kw'>let</span> <span class='ident'>d</span>: <span class='ident'>Vec</span><span class='op'>&lt;</span>_<span class='op'>&gt;</span> <span class='op'>=</span> <span class='ident'>x</span>.<span class='ident'>split</span>(<span class='string'>&#39; &#39;</span>).<span class='ident'>collect</span>();
+
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>d</span>, <span class='kw-2'>&amp;</span>[<span class='string'>&quot;&quot;</span>, <span class='string'>&quot;&quot;</span>, <span class='string'>&quot;&quot;</span>, <span class='string'>&quot;&quot;</span>, <span class='string'>&quot;a&quot;</span>, <span class='string'>&quot;&quot;</span>, <span class='string'>&quot;b&quot;</span>, <span class='string'>&quot;c&quot;</span>]);
+</pre>
+
+<p>It does <em>not</em> give you:</p>
+<pre class='rust rust-example-rendered'>
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>d</span>, <span class='kw-2'>&amp;</span>[<span class='string'>&quot;a&quot;</span>, <span class='string'>&quot;b&quot;</span>, <span class='string'>&quot;c&quot;</span>]);
 </pre>
 </div><h4 id='method.rsplit' class='method'><code>fn <a href='#method.rsplit' class='fnname'>rsplit</a>&lt;'a, P&gt;(&amp;'a self, pat: P) -&gt; <a class='struct' href='http://doc.rust-lang.org/nightly/core/str/struct.RSplit.html' title='core::str::RSplit'>RSplit</a>&lt;'a, P&gt; <span class='where'>where P: <a class='trait' href='http://doc.rust-lang.org/nightly/core/str/pattern/trait.Pattern.html' title='core::str::pattern::Pattern'>Pattern</a>&lt;'a&gt;, P::<a class='trait' href='http://doc.rust-lang.org/nightly/core/str/pattern/trait.Pattern.html' title='core::str::pattern::Pattern'>Searcher</a>: <a class='trait' href='http://doc.rust-lang.org/nightly/core/str/pattern/trait.ReverseSearcher.html' title='core::str::pattern::ReverseSearcher'>ReverseSearcher</a>&lt;'a&gt;</span></code></h4>
 <div class='docblock'><p>An iterator over substrings of <code>self</code>, separated by characters
@@ -1048,7 +1092,7 @@ replace it with. If the original <code>&amp;str</code> isn&#39;t found, no chang
 <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>s</span>.<span class='ident'>replace</span>(<span class='string'>&quot;cookie monster&quot;</span>, <span class='string'>&quot;little lamb&quot;</span>), <span class='ident'>s</span>);
 </pre>
 </div><h4 id='method.to_lowercase' class='method'><code>fn <a href='#method.to_lowercase' class='fnname'>to_lowercase</a>(&amp;self) -&gt; <a class='struct' href='http://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a></code></h4>
-<div class='stability'><em class='stab unstable'>Unstable</em></div><div class='docblock'><p>Returns the lowercase equivalent of this string.</p>
+<div class='docblock'><p>Returns the lowercase equivalent of this string.</p>
 
 <h1 id="examples" class='section-header'><a
                            href="#examples">Examples</a></h1><pre class='rust rust-example-rendered'>
@@ -1058,7 +1102,7 @@ replace it with. If the original <code>&amp;str</code> isn&#39;t found, no chang
 <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>s</span>.<span class='ident'>to_lowercase</span>(), <span class='string'>&quot;hello&quot;</span>);
 </pre>
 </div><h4 id='method.to_uppercase' class='method'><code>fn <a href='#method.to_uppercase' class='fnname'>to_uppercase</a>(&amp;self) -&gt; <a class='struct' href='http://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a></code></h4>
-<div class='stability'><em class='stab unstable'>Unstable</em></div><div class='docblock'><p>Returns the uppercase equivalent of this string.</p>
+<div class='docblock'><p>Returns the uppercase equivalent of this string.</p>
 
 <h1 id="examples" class='section-header'><a
                            href="#examples">Examples</a></h1><pre class='rust rust-example-rendered'>
