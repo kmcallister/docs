@@ -42,8 +42,10 @@
 
     <section id='main' class="content struct">
 <h1 class='fqn'><span class='in-band'>Struct <a href='index.html'>tendril</a>::<wbr><a class='struct' href=''>Tendril</a></span><span class='out-of-band'><span id='render-detail'>
-            <a id="toggle-all-docs" href="#" title="collapse all docs">[&minus;]</a>
-        </span><a id='src-2913' class='srclink' href='../src/tendril/tendril.rs.html#91-98' title='goto source code'>[src]</a></span></h1>
+            <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                [<span class='inner'>&#x2212;</span>]
+            </a>
+        </span><a id='src-3032' class='srclink' href='../src/tendril/tendril.rs.html#91-98' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct Tendril&lt;F&gt; <span class='where'>where F: <a class='trait' href='../tendril/fmt/trait.Format.html' title='tendril::fmt::Format'>Format</a></span> {
     // some fields omitted
 }</pre><div class='docblock'><p>Compact string type for zero-copy parsing.</p>
@@ -172,9 +174,9 @@ validation.</p>
 <div class='docblock'><p>Drop <code>n</code> bytes from the back.</p>
 
 <p>Does not check validity or bounds!</p>
-</div></div><h3 class='impl'><code>impl&lt;F&gt; <a class='struct' href='../tendril/struct.Tendril.html' title='tendril::Tendril'>Tendril</a>&lt;F&gt; <span class='where'>where F: <a class='trait' href='../tendril/fmt/trait.SliceFormat.html' title='tendril::fmt::SliceFormat'>SliceFormat</a></span></code></h3><div class='impl-items'><h4 id='method.from_slice' class='method'><code>fn <a href='#method.from_slice' class='fnname'>from_slice</a>(x: &amp;F) -&gt; <a class='struct' href='../tendril/struct.Tendril.html' title='tendril::Tendril'>Tendril</a>&lt;F&gt;</code></h4>
+</div></div><h3 class='impl'><code>impl&lt;F&gt; <a class='struct' href='../tendril/struct.Tendril.html' title='tendril::Tendril'>Tendril</a>&lt;F&gt; <span class='where'>where F: <a class='trait' href='../tendril/fmt/trait.SliceFormat.html' title='tendril::fmt::SliceFormat'>SliceFormat</a></span></code></h3><div class='impl-items'><h4 id='method.from_slice' class='method'><code>fn <a href='#method.from_slice' class='fnname'>from_slice</a>(x: &amp;F::Slice) -&gt; <a class='struct' href='../tendril/struct.Tendril.html' title='tendril::Tendril'>Tendril</a>&lt;F&gt;</code></h4>
 <div class='docblock'><p>Build a <code>Tendril</code> by copying a slice.</p>
-</div><h4 id='method.push_slice' class='method'><code>fn <a href='#method.push_slice' class='fnname'>push_slice</a>(&amp;mut self, x: &amp;F)</code></h4>
+</div><h4 id='method.push_slice' class='method'><code>fn <a href='#method.push_slice' class='fnname'>push_slice</a>(&amp;mut self, x: &amp;F::Slice)</code></h4>
 <div class='docblock'><p>Push a slice onto the end of the <code>Tendril</code>.</p>
 </div></div><h3 class='impl'><code>impl&lt;F&gt; <a class='struct' href='../tendril/struct.Tendril.html' title='tendril::Tendril'>Tendril</a>&lt;F&gt; <span class='where'>where F: for&lt;'a&gt; <a class='trait' href='../tendril/fmt/trait.CharFormat.html' title='tendril::fmt::CharFormat'>CharFormat</a>&lt;'a&gt;</span></code></h3><div class='impl-items'><h4 id='method.pop_front_char' class='method'><code>fn <a href='#method.pop_front_char' class='fnname'>pop_front_char</a>&lt;'a&gt;(&amp;'a mut self) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.char.html'>char</a>&gt;</code></h4>
 <div class='docblock'><p>Remove and return the first character, if any.</p>
@@ -210,8 +212,8 @@ for more information.</p>
 </div></div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><code>impl&lt;F&gt; <a class='trait' href='http://doc.rust-lang.org/nightly/core/clone/trait.Clone.html' title='core::clone::Clone'>Clone</a> for <a class='struct' href='../tendril/struct.Tendril.html' title='tendril::Tendril'>Tendril</a>&lt;F&gt; <span class='where'>where F: <a class='trait' href='../tendril/fmt/trait.Format.html' title='tendril::fmt::Format'>Format</a></span></code></h3><div class='impl-items'><h4 id='method.clone' class='method'><code>fn <a href='http://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#method.clone' class='fnname'>clone</a>(&amp;self) -&gt; <a class='struct' href='../tendril/struct.Tendril.html' title='tendril::Tendril'>Tendril</a>&lt;F&gt;</code></h4>
 <h4 id='method.clone_from' class='method'><code>fn <a href='http://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#method.clone_from' class='fnname'>clone_from</a>(&amp;mut self, source: &amp;Self)</code></h4>
 </div><h3 class='impl'><code>impl&lt;F&gt; <a class='trait' href='http://doc.rust-lang.org/nightly/core/ops/trait.Drop.html' title='core::ops::Drop'>Drop</a> for <a class='struct' href='../tendril/struct.Tendril.html' title='tendril::Tendril'>Tendril</a>&lt;F&gt; <span class='where'>where F: <a class='trait' href='../tendril/fmt/trait.Format.html' title='tendril::fmt::Format'>Format</a></span></code></h3><div class='impl-items'><h4 id='method.drop' class='method'><code>fn <a href='http://doc.rust-lang.org/nightly/core/ops/trait.Drop.html#method.drop' class='fnname'>drop</a>(&amp;mut self)</code></h4>
-</div><h3 class='impl'><code>impl&lt;F&gt; <a class='trait' href='http://doc.rust-lang.org/nightly/core/ops/trait.Deref.html' title='core::ops::Deref'>Deref</a> for <a class='struct' href='../tendril/struct.Tendril.html' title='tendril::Tendril'>Tendril</a>&lt;F&gt; <span class='where'>where F: <a class='trait' href='../tendril/fmt/trait.SliceFormat.html' title='tendril::fmt::SliceFormat'>SliceFormat</a></span></code></h3><div class='impl-items'><h4 id='assoc_type.Target' class='type'><code>type Target = F</code></h4>
-<h4 id='method.deref' class='method'><code>fn <a href='http://doc.rust-lang.org/nightly/core/ops/trait.Deref.html#method.deref' class='fnname'>deref</a>(&amp;self) -&gt; &amp;F</code></h4>
+</div><h3 class='impl'><code>impl&lt;F&gt; <a class='trait' href='http://doc.rust-lang.org/nightly/core/ops/trait.Deref.html' title='core::ops::Deref'>Deref</a> for <a class='struct' href='../tendril/struct.Tendril.html' title='tendril::Tendril'>Tendril</a>&lt;F&gt; <span class='where'>where F: <a class='trait' href='../tendril/fmt/trait.SliceFormat.html' title='tendril::fmt::SliceFormat'>SliceFormat</a></span></code></h3><div class='impl-items'><h4 id='assoc_type.Target' class='type'><code>type Target = F::Slice</code></h4>
+<h4 id='method.deref' class='method'><code>fn <a href='http://doc.rust-lang.org/nightly/core/ops/trait.Deref.html#method.deref' class='fnname'>deref</a>(&amp;self) -&gt; &amp;F::Slice</code></h4>
 </div><h3 class='impl'><code>impl&lt;'a, F&gt; <a class='trait' href='http://doc.rust-lang.org/nightly/core/iter/trait.Extend.html' title='core::iter::Extend'>Extend</a>&lt;&amp;'a <a class='struct' href='../tendril/struct.Tendril.html' title='tendril::Tendril'>Tendril</a>&lt;F&gt;&gt; for <a class='struct' href='../tendril/struct.Tendril.html' title='tendril::Tendril'>Tendril</a>&lt;F&gt; <span class='where'>where F: <a class='trait' href='../tendril/fmt/trait.Format.html' title='tendril::fmt::Format'>Format</a> + 'a</span></code></h3><div class='impl-items'><h4 id='method.extend' class='method'><code>fn <a href='http://doc.rust-lang.org/nightly/core/iter/trait.Extend.html#method.extend' class='fnname'>extend</a>&lt;I&gt;(&amp;mut self, iterable: I) <span class='where'>where I: <a class='trait' href='http://doc.rust-lang.org/nightly/core/iter/trait.IntoIterator.html' title='core::iter::IntoIterator'>IntoIterator</a>&lt;Item=&amp;'a <a class='struct' href='../tendril/struct.Tendril.html' title='tendril::Tendril'>Tendril</a>&lt;F&gt;&gt;</span></code></h4>
 </div><h3 class='impl'><code>impl&lt;F&gt; <a class='trait' href='http://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html' title='core::cmp::PartialEq'>PartialEq</a> for <a class='struct' href='../tendril/struct.Tendril.html' title='tendril::Tendril'>Tendril</a>&lt;F&gt; <span class='where'>where F: <a class='trait' href='../tendril/fmt/trait.Format.html' title='tendril::fmt::Format'>Format</a></span></code></h3><div class='impl-items'><h4 id='method.eq' class='method'><code>fn <a href='http://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html#method.eq' class='fnname'>eq</a>(&amp;self, other: &amp;Self) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
 <h4 id='method.ne' class='method'><code>fn <a href='http://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html#method.ne' class='fnname'>ne</a>(&amp;self, other: &amp;Self) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
@@ -276,6 +278,10 @@ for more information.</p>
                 <code>struct</code>, <code>enum</code>,
                 <code>trait</code>, <code>typedef</code> (or
                 <code>tdef</code>).
+            </p>
+            <p>
+                Search functions by type signature (e.g.
+                <code>vec -> usize</code>)
             </p>
         </div>
     </div>
