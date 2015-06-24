@@ -292,7 +292,7 @@
 <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>test</span>)]</span>
 <span class='kw'>mod</span> <span class='ident'>test</span> {
     <span class='kw'>use</span> <span class='ident'>super</span>::<span class='ident'>Buf32</span>;
-    <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>intrinsics</span>;
+    <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>ptr</span>;
 
     <span class='attribute'>#[<span class='ident'>test</span>]</span>
     <span class='kw'>fn</span> <span class='ident'>smoke_test</span>() {
@@ -301,7 +301,7 @@
             <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='string'>b&quot;&quot;</span>, <span class='ident'>b</span>.<span class='ident'>data</span>());
 
             <span class='ident'>b</span>.<span class='ident'>grow</span>(<span class='number'>5</span>);
-            <span class='ident'>intrinsics</span>::<span class='ident'>copy_nonoverlapping</span>(<span class='string'>b&quot;Hello&quot;</span>.<span class='ident'>as_ptr</span>(), <span class='ident'>b</span>.<span class='ident'>data_ptr</span>(), <span class='number'>5</span>);
+            <span class='ident'>ptr</span>::<span class='ident'>copy_nonoverlapping</span>(<span class='string'>b&quot;Hello&quot;</span>.<span class='ident'>as_ptr</span>(), <span class='ident'>b</span>.<span class='ident'>data_ptr</span>(), <span class='number'>5</span>);
 
             <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='string'>b&quot;&quot;</span>, <span class='ident'>b</span>.<span class='ident'>data</span>());
             <span class='ident'>b</span>.<span class='ident'>len</span> <span class='op'>=</span> <span class='number'>5</span>;
