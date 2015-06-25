@@ -239,47 +239,6 @@
 <span id="197">197</span>
 <span id="198">198</span>
 <span id="199">199</span>
-<span id="200">200</span>
-<span id="201">201</span>
-<span id="202">202</span>
-<span id="203">203</span>
-<span id="204">204</span>
-<span id="205">205</span>
-<span id="206">206</span>
-<span id="207">207</span>
-<span id="208">208</span>
-<span id="209">209</span>
-<span id="210">210</span>
-<span id="211">211</span>
-<span id="212">212</span>
-<span id="213">213</span>
-<span id="214">214</span>
-<span id="215">215</span>
-<span id="216">216</span>
-<span id="217">217</span>
-<span id="218">218</span>
-<span id="219">219</span>
-<span id="220">220</span>
-<span id="221">221</span>
-<span id="222">222</span>
-<span id="223">223</span>
-<span id="224">224</span>
-<span id="225">225</span>
-<span id="226">226</span>
-<span id="227">227</span>
-<span id="228">228</span>
-<span id="229">229</span>
-<span id="230">230</span>
-<span id="231">231</span>
-<span id="232">232</span>
-<span id="233">233</span>
-<span id="234">234</span>
-<span id="235">235</span>
-<span id="236">236</span>
-<span id="237">237</span>
-<span id="238">238</span>
-<span id="239">239</span>
-<span id="240">240</span>
 </pre><pre class='rust '>
 <span class='comment'>// Copyright 2014 The html5ever Project Developers. See the</span>
 <span class='comment'>// COPYRIGHT file at the top-level directory of this distribution.</span>
@@ -344,7 +303,7 @@
     <span class='number'>0xf8</span>, <span class='number'>0xf9</span>, <span class='number'>0xfa</span>, <span class='number'>0xfb</span>, <span class='number'>0xfc</span>, <span class='number'>0xfd</span>, <span class='number'>0xfe</span>, <span class='number'>0xff</span>,
 ];
 
-<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Clone</span>, <span class='ident'>PartialEq</span>, <span class='ident'>PartialOrd</span>, <span class='ident'>Ord</span>, <span class='ident'>Eq</span>, <span class='ident'>Hash</span>)]</span>
+<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Copy</span>, <span class='ident'>Clone</span>, <span class='ident'>PartialEq</span>, <span class='ident'>PartialOrd</span>, <span class='ident'>Ord</span>, <span class='ident'>Eq</span>, <span class='ident'>Hash</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>Ascii</span> {
     <span class='ident'>chr</span>: <span class='ident'>u8</span>,
 }
@@ -385,6 +344,7 @@
 }
 
 <span class='kw'>impl</span> <span class='ident'>AsciiCast</span> <span class='kw'>for</span> <span class='ident'>char</span> {
+    <span class='attribute'>#[<span class='ident'>inline</span>]</span>
     <span class='kw'>fn</span> <span class='ident'>to_ascii_opt</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>Ascii</span><span class='op'>&gt;</span> {
         <span class='kw'>let</span> <span class='ident'>n</span> <span class='op'>=</span> <span class='op'>*</span><span class='self'>self</span> <span class='kw'>as</span> <span class='ident'>u32</span>;
         <span class='kw'>if</span> <span class='ident'>n</span> <span class='op'>&lt;</span> <span class='number'>0x80</span> {
@@ -449,11 +409,6 @@
     <span class='ident'>c</span>.<span class='ident'>to_ascii_opt</span>().<span class='ident'>map_or</span>(<span class='boolval'>false</span>, <span class='op'>|</span><span class='ident'>a</span><span class='op'>|</span> <span class='ident'>a</span>.<span class='ident'>is_alphanumeric</span>())
 }
 
-<span class='doccomment'>/// Allocate an empty string with a small non-zero capacity.</span>
-<span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>empty_str</span>() <span class='op'>-&gt;</span> <span class='ident'>String</span> {
-    <span class='ident'>String</span>::<span class='ident'>with_capacity</span>(<span class='number'>4</span>)
-}
-
 <span class='doccomment'>/// ASCII whitespace characters, as defined by</span>
 <span class='doccomment'>/// tree construction modes that treat them specially.</span>
 <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>is_ascii_whitespace</span>(<span class='ident'>c</span>: <span class='ident'>char</span>) <span class='op'>-&gt;</span> <span class='ident'>bool</span> {
@@ -463,29 +418,10 @@
     }
 }
 
-<span class='doccomment'>/// Count how many bytes at the beginning of the string</span>
-<span class='doccomment'>/// either all match or all don&#39;t match the predicate,</span>
-<span class='doccomment'>/// and also return whether they match.</span>
-<span class='doccomment'>///</span>
-<span class='doccomment'>/// Returns `None` on an empty string.</span>
-<span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>char_run</span><span class='op'>&lt;</span><span class='ident'>Pred</span><span class='op'>&gt;</span>(<span class='kw-2'>mut</span> <span class='ident'>pred</span>: <span class='ident'>Pred</span>, <span class='ident'>buf</span>: <span class='kw-2'>&amp;</span><span class='ident'>str</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Option</span><span class='op'>&lt;</span>(<span class='ident'>usize</span>, <span class='ident'>bool</span>)<span class='op'>&gt;</span>
-    <span class='kw'>where</span> <span class='ident'>Pred</span>: <span class='ident'>FnMut</span>(<span class='ident'>char</span>) <span class='op'>-&gt;</span> <span class='ident'>bool</span>,
-{
-    <span class='kw'>let</span> (<span class='ident'>first</span>, <span class='ident'>rest</span>) <span class='op'>=</span> <span class='macro'>unwrap_or_return</span><span class='macro'>!</span>(<span class='ident'>buf</span>.<span class='ident'>slice_shift_char</span>(), <span class='prelude-val'>None</span>);
-    <span class='kw'>let</span> <span class='ident'>matches</span> <span class='op'>=</span> <span class='ident'>pred</span>(<span class='ident'>first</span>);
-
-    <span class='kw'>for</span> (<span class='ident'>idx</span>, <span class='ident'>ch</span>) <span class='kw'>in</span> <span class='ident'>rest</span>.<span class='ident'>char_indices</span>() {
-        <span class='kw'>if</span> <span class='ident'>matches</span> <span class='op'>!=</span> <span class='ident'>pred</span>(<span class='ident'>ch</span>) {
-            <span class='kw'>return</span> <span class='prelude-val'>Some</span>((<span class='ident'>idx</span> <span class='op'>+</span> <span class='ident'>first</span>.<span class='ident'>len_utf8</span>(), <span class='ident'>matches</span>));
-        }
-    }
-    <span class='prelude-val'>Some</span>((<span class='ident'>buf</span>.<span class='ident'>len</span>(), <span class='ident'>matches</span>))
-}
-
 <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>test</span>)]</span>
 <span class='attribute'>#[<span class='ident'>allow</span>(<span class='ident'>non_snake_case</span>)]</span>
 <span class='kw'>mod</span> <span class='ident'>test</span> {
-    <span class='kw'>use</span> <span class='ident'>super</span>::{<span class='ident'>char_run</span>, <span class='ident'>is_ascii_whitespace</span>, <span class='ident'>is_ascii_alnum</span>, <span class='ident'>lower_ascii</span>, <span class='ident'>lower_ascii_letter</span>};
+    <span class='kw'>use</span> <span class='ident'>super</span>::{<span class='ident'>is_ascii_alnum</span>, <span class='ident'>lower_ascii</span>, <span class='ident'>lower_ascii_letter</span>};
 
     <span class='macro'>test_eq</span><span class='macro'>!</span>(<span class='ident'>lower_letter_a_is_a</span>, <span class='ident'>lower_ascii_letter</span>(<span class='string'>&#39;a&#39;</span>), <span class='prelude-val'>Some</span>(<span class='string'>&#39;a&#39;</span>));
     <span class='macro'>test_eq</span><span class='macro'>!</span>(<span class='ident'>lower_letter_A_is_a</span>, <span class='ident'>lower_ascii_letter</span>(<span class='string'>&#39;A&#39;</span>), <span class='prelude-val'>Some</span>(<span class='string'>&#39;a&#39;</span>));
@@ -502,24 +438,6 @@
     <span class='macro'>test_eq</span><span class='macro'>!</span>(<span class='ident'>is_alnum_1</span>, <span class='ident'>is_ascii_alnum</span>(<span class='string'>&#39;1&#39;</span>), <span class='boolval'>true</span>);
     <span class='macro'>test_eq</span><span class='macro'>!</span>(<span class='ident'>is_not_alnum_symbol</span>, <span class='ident'>is_ascii_alnum</span>(<span class='string'>&#39;!&#39;</span>), <span class='boolval'>false</span>);
     <span class='macro'>test_eq</span><span class='macro'>!</span>(<span class='ident'>is_not_alnum_nonascii</span>, <span class='ident'>is_ascii_alnum</span>(<span class='string'>&#39;\u{a66e}&#39;</span>), <span class='boolval'>false</span>);
-
-    <span class='macro'>macro_rules</span><span class='macro'>!</span> <span class='ident'>test_char_run</span> ( (<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>name</span>:<span class='ident'>ident</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>input</span>:<span class='ident'>expr</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>expect</span>:<span class='ident'>expr</span>) <span class='op'>=&gt;</span> (
-        <span class='macro'>test_eq</span><span class='macro'>!</span>(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>name</span>, <span class='ident'>char_run</span>(<span class='ident'>is_ascii_whitespace</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>input</span>), <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>expect</span>);
-    ));
-
-    <span class='macro'>test_char_run</span><span class='macro'>!</span>(<span class='ident'>run_empty</span>, <span class='string'>&quot;&quot;</span>, <span class='prelude-val'>None</span>);
-    <span class='macro'>test_char_run</span><span class='macro'>!</span>(<span class='ident'>run_one_t</span>, <span class='string'>&quot; &quot;</span>, <span class='prelude-val'>Some</span>((<span class='number'>1</span>, <span class='boolval'>true</span>)));
-    <span class='macro'>test_char_run</span><span class='macro'>!</span>(<span class='ident'>run_one_f</span>, <span class='string'>&quot;x&quot;</span>, <span class='prelude-val'>Some</span>((<span class='number'>1</span>, <span class='boolval'>false</span>)));
-    <span class='macro'>test_char_run</span><span class='macro'>!</span>(<span class='ident'>run_t</span>, <span class='string'>&quot;  \t  \n&quot;</span>, <span class='prelude-val'>Some</span>((<span class='number'>6</span>, <span class='boolval'>true</span>)));
-    <span class='macro'>test_char_run</span><span class='macro'>!</span>(<span class='ident'>run_f</span>, <span class='string'>&quot;xyzzy&quot;</span>, <span class='prelude-val'>Some</span>((<span class='number'>5</span>, <span class='boolval'>false</span>)));
-    <span class='macro'>test_char_run</span><span class='macro'>!</span>(<span class='ident'>run_tf</span>, <span class='string'>&quot;   xyzzy&quot;</span>, <span class='prelude-val'>Some</span>((<span class='number'>3</span>, <span class='boolval'>true</span>)));
-    <span class='macro'>test_char_run</span><span class='macro'>!</span>(<span class='ident'>run_ft</span>, <span class='string'>&quot;xyzzy   &quot;</span>, <span class='prelude-val'>Some</span>((<span class='number'>5</span>, <span class='boolval'>false</span>)));
-    <span class='macro'>test_char_run</span><span class='macro'>!</span>(<span class='ident'>run_tft</span>, <span class='string'>&quot;   xyzzy  &quot;</span>, <span class='prelude-val'>Some</span>((<span class='number'>3</span>, <span class='boolval'>true</span>)));
-    <span class='macro'>test_char_run</span><span class='macro'>!</span>(<span class='ident'>run_ftf</span>, <span class='string'>&quot;xyzzy   hi&quot;</span>, <span class='prelude-val'>Some</span>((<span class='number'>5</span>, <span class='boolval'>false</span>)));
-    <span class='macro'>test_char_run</span><span class='macro'>!</span>(<span class='ident'>run_multibyte_0</span>, <span class='string'>&quot;中 &quot;</span>, <span class='prelude-val'>Some</span>((<span class='number'>3</span>, <span class='boolval'>false</span>)));
-    <span class='macro'>test_char_run</span><span class='macro'>!</span>(<span class='ident'>run_multibyte_1</span>, <span class='string'>&quot; 中 &quot;</span>, <span class='prelude-val'>Some</span>((<span class='number'>1</span>, <span class='boolval'>true</span>)));
-    <span class='macro'>test_char_run</span><span class='macro'>!</span>(<span class='ident'>run_multibyte_2</span>, <span class='string'>&quot;  中 &quot;</span>, <span class='prelude-val'>Some</span>((<span class='number'>2</span>, <span class='boolval'>true</span>)));
-    <span class='macro'>test_char_run</span><span class='macro'>!</span>(<span class='ident'>run_multibyte_3</span>, <span class='string'>&quot;   中 &quot;</span>, <span class='prelude-val'>Some</span>((<span class='number'>3</span>, <span class='boolval'>true</span>)));
 }
 </pre>
 </section>

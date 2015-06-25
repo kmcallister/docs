@@ -45,12 +45,12 @@
             <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                 [<span class='inner'>&#x2212;</span>]
             </a>
-        </span><a id='src-12474' class='srclink' href='../../src/html5ever/tokenizer/interface.rs.html#86-94' title='goto source code'>[src]</a></span></h1>
+        </span><a id='src-12381' class='srclink' href='../../src/html5ever/tokenizer/interface.rs.html#87-95' title='goto source code'>[src]</a></span></h1>
 <pre class='rust enum'>pub enum Token {
     DoctypeToken(<a class='struct' href='../../html5ever/tokenizer/struct.Doctype.html' title='html5ever::tokenizer::Doctype'>Doctype</a>),
     TagToken(<a class='struct' href='../../html5ever/tokenizer/struct.Tag.html' title='html5ever::tokenizer::Tag'>Tag</a>),
-    CommentToken(<a class='struct' href='http://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a>),
-    CharacterTokens(<a class='struct' href='http://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a>),
+    CommentToken(<a class='type' href='../../tendril/tendril/type.StrTendril.html' title='tendril::tendril::StrTendril'>StrTendril</a>),
+    CharacterTokens(<a class='type' href='../../tendril/tendril/type.StrTendril.html' title='tendril::tendril::StrTendril'>StrTendril</a>),
     NullCharacterToken,
     EOFToken,
     ParseError(<a class='enum' href='http://doc.rust-lang.org/nightly/collections/borrow/enum.Cow.html' title='collections::borrow::Cow'>Cow</a>&lt;'static, <a href='http://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>&gt;),
