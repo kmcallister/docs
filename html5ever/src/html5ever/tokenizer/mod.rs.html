@@ -1384,6 +1384,8 @@
 <span id="1342">1342</span>
 <span id="1343">1343</span>
 <span id="1344">1344</span>
+<span id="1345">1345</span>
+<span id="1346">1346</span>
 </pre><pre class='rust '>
 <span class='comment'>// Copyright 2014 The html5ever Project Developers. See the</span>
 <span class='comment'>// COPYRIGHT file at the top-level directory of this distribution.</span>
@@ -1413,9 +1415,10 @@
 
 <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>buffer_queue</span>::{<span class='ident'>BufferQueue</span>, <span class='ident'>SetResult</span>, <span class='ident'>FromSet</span>, <span class='ident'>NotFromSet</span>};
 
-<span class='kw'>use</span> <span class='ident'>util</span>::<span class='ident'>str</span>::{<span class='ident'>lower_ascii</span>, <span class='ident'>lower_ascii_letter</span>};
+<span class='kw'>use</span> <span class='ident'>util</span>::<span class='ident'>str</span>::<span class='ident'>lower_ascii_letter</span>;
 <span class='kw'>use</span> <span class='ident'>util</span>::<span class='ident'>smallcharset</span>::<span class='ident'>SmallCharSet</span>;
 
+<span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>ascii</span>::<span class='ident'>AsciiExt</span>;
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>mem</span>::<span class='ident'>replace</span>;
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>default</span>::<span class='ident'>Default</span>;
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>borrow</span>::<span class='ident'>Cow</span>::{<span class='self'>self</span>, <span class='ident'>Borrowed</span>};
@@ -2126,7 +2129,7 @@
                 <span class='string'>&#39;/&#39;</span>  <span class='op'>=&gt;</span> <span class='macro'>go</span><span class='macro'>!</span>(<span class='self'>self</span>: <span class='ident'>to</span> <span class='ident'>SelfClosingStartTag</span>),
                 <span class='string'>&#39;&gt;&#39;</span>  <span class='op'>=&gt;</span> <span class='macro'>go</span><span class='macro'>!</span>(<span class='self'>self</span>: <span class='ident'>emit_tag</span> <span class='ident'>Data</span>),
                 <span class='string'>&#39;\0&#39;</span> <span class='op'>=&gt;</span> <span class='macro'>go</span><span class='macro'>!</span>(<span class='self'>self</span>: <span class='ident'>error</span>; <span class='ident'>push_tag</span> <span class='string'>&#39;\u{fffd}&#39;</span>),
-                <span class='ident'>c</span>    <span class='op'>=&gt;</span> <span class='macro'>go</span><span class='macro'>!</span>(<span class='self'>self</span>: <span class='ident'>push_tag</span> (<span class='ident'>lower_ascii</span>(<span class='ident'>c</span>))),
+                <span class='ident'>c</span>    <span class='op'>=&gt;</span> <span class='macro'>go</span><span class='macro'>!</span>(<span class='self'>self</span>: <span class='ident'>push_tag</span> (<span class='ident'>c</span>.<span class='ident'>to_ascii_lowercase</span>())),
             }},
 
             <span class='comment'>//§ script-data-escaped-less-than-sign-state</span>
@@ -2426,7 +2429,8 @@
                 <span class='string'>&#39;\t&#39;</span> <span class='op'>|</span> <span class='string'>&#39;\n&#39;</span> <span class='op'>|</span> <span class='string'>&#39;\x0C&#39;</span> <span class='op'>|</span> <span class='string'>&#39; &#39;</span> <span class='op'>=&gt;</span> (),
                 <span class='string'>&#39;\0&#39;</span> <span class='op'>=&gt;</span> <span class='macro'>go</span><span class='macro'>!</span>(<span class='self'>self</span>: <span class='ident'>error</span>; <span class='ident'>create_doctype</span>; <span class='ident'>push_doctype_name</span> <span class='string'>&#39;\u{fffd}&#39;</span>; <span class='ident'>to</span> <span class='ident'>DoctypeName</span>),
                 <span class='string'>&#39;&gt;&#39;</span>  <span class='op'>=&gt;</span> <span class='macro'>go</span><span class='macro'>!</span>(<span class='self'>self</span>: <span class='ident'>error</span>; <span class='ident'>create_doctype</span>; <span class='ident'>force_quirks</span>; <span class='ident'>emit_doctype</span>; <span class='ident'>to</span> <span class='ident'>Data</span>),
-                <span class='ident'>c</span>    <span class='op'>=&gt;</span> <span class='macro'>go</span><span class='macro'>!</span>(<span class='self'>self</span>: <span class='ident'>create_doctype</span>; <span class='ident'>push_doctype_name</span> (<span class='ident'>lower_ascii</span>(<span class='ident'>c</span>)); <span class='ident'>to</span> <span class='ident'>DoctypeName</span>),
+                <span class='ident'>c</span>    <span class='op'>=&gt;</span> <span class='macro'>go</span><span class='macro'>!</span>(<span class='self'>self</span>: <span class='ident'>create_doctype</span>; <span class='ident'>push_doctype_name</span> (<span class='ident'>c</span>.<span class='ident'>to_ascii_lowercase</span>()); 
+                                  <span class='ident'>to</span> <span class='ident'>DoctypeName</span>),
             }},
 
             <span class='comment'>//§ doctype-name-state</span>
@@ -2435,7 +2439,7 @@
                      <span class='op'>=&gt;</span> <span class='macro'>go</span><span class='macro'>!</span>(<span class='self'>self</span>: <span class='ident'>to</span> <span class='ident'>AfterDoctypeName</span>),
                 <span class='string'>&#39;&gt;&#39;</span>  <span class='op'>=&gt;</span> <span class='macro'>go</span><span class='macro'>!</span>(<span class='self'>self</span>: <span class='ident'>emit_doctype</span>; <span class='ident'>to</span> <span class='ident'>Data</span>),
                 <span class='string'>&#39;\0&#39;</span> <span class='op'>=&gt;</span> <span class='macro'>go</span><span class='macro'>!</span>(<span class='self'>self</span>: <span class='ident'>error</span>; <span class='ident'>push_doctype_name</span> <span class='string'>&#39;\u{fffd}&#39;</span>),
-                <span class='ident'>c</span>    <span class='op'>=&gt;</span> <span class='macro'>go</span><span class='macro'>!</span>(<span class='self'>self</span>: <span class='ident'>push_doctype_name</span> (<span class='ident'>lower_ascii</span>(<span class='ident'>c</span>))),
+                <span class='ident'>c</span>    <span class='op'>=&gt;</span> <span class='macro'>go</span><span class='macro'>!</span>(<span class='self'>self</span>: <span class='ident'>push_doctype_name</span> (<span class='ident'>c</span>.<span class='ident'>to_ascii_lowercase</span>())),
             }},
 
             <span class='comment'>//§ after-doctype-name-state</span>

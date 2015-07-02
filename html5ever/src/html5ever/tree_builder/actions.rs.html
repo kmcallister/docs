@@ -1127,6 +1127,7 @@
 <span id="1085">1085</span>
 <span id="1086">1086</span>
 <span id="1087">1087</span>
+<span id="1088">1088</span>
 </pre><pre class='rust '>
 <span class='comment'>// Copyright 2014 The html5ever Project Developers. See the</span>
 <span class='comment'>// COPYRIGHT file at the top-level directory of this distribution.</span>
@@ -1150,8 +1151,9 @@
 <span class='kw'>use</span> <span class='ident'>tokenizer</span>::{<span class='ident'>Attribute</span>, <span class='ident'>Tag</span>, <span class='ident'>StartTag</span>, <span class='ident'>EndTag</span>};
 <span class='kw'>use</span> <span class='ident'>tokenizer</span>::<span class='ident'>states</span>::{<span class='ident'>RawData</span>, <span class='ident'>RawKind</span>};
 
-<span class='kw'>use</span> <span class='ident'>util</span>::<span class='ident'>str</span>::{<span class='ident'>AsciiExt</span>, <span class='ident'>to_escaped_string</span>};
+<span class='kw'>use</span> <span class='ident'>util</span>::<span class='ident'>str</span>::<span class='ident'>to_escaped_string</span>;
 
+<span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>ascii</span>::<span class='ident'>AsciiExt</span>;
 <span class='kw'>use</span> <span class='ident'>std</span>::{<span class='ident'>slice</span>, <span class='ident'>fmt</span>};
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>mem</span>::<span class='ident'>replace</span>;
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>iter</span>::{<span class='ident'>Rev</span>, <span class='ident'>Enumerate</span>};
