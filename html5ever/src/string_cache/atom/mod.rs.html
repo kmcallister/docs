@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-0a35038f75765ae4/string_cache-0.1.4/src/atom/mod.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-0a35038f75765ae4/string_cache-0.1.5/src/atom/mod.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>mod.rs.html -- source</title>
@@ -34,7 +34,7 @@
             <div class="search-container">
                 <input class="search-input" name="search"
                        autocomplete="off"
-                       placeholder="Click or press 'S' to search, '?' for more options..."
+                       placeholder="Click or press ‘S’ to search, ‘?’ for more options…"
                        type="search">
             </div>
         </form>
@@ -565,6 +565,19 @@
 <span id="523">523</span>
 <span id="524">524</span>
 <span id="525">525</span>
+<span id="526">526</span>
+<span id="527">527</span>
+<span id="528">528</span>
+<span id="529">529</span>
+<span id="530">530</span>
+<span id="531">531</span>
+<span id="532">532</span>
+<span id="533">533</span>
+<span id="534">534</span>
+<span id="535">535</span>
+<span id="536">536</span>
+<span id="537">537</span>
+<span id="538">538</span>
 </pre><pre class='rust '>
 <span class='comment'>// Copyright 2014 The Servo Project Developers. See the COPYRIGHT</span>
 <span class='comment'>// file at the top-level directory of this distribution.</span>
@@ -871,6 +884,12 @@
     }
 }
 
+<span class='kw'>impl</span> <span class='ident'>AsRef</span><span class='op'>&lt;</span><span class='ident'>str</span><span class='op'>&gt;</span> <span class='kw'>for</span> <span class='ident'>Atom</span> {
+    <span class='kw'>fn</span> <span class='ident'>as_ref</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='ident'>str</span> {
+        <span class='kw-2'>&amp;</span><span class='self'>self</span>
+    }
+}
+
 <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>test</span>)]</span>
 <span class='kw'>mod</span> <span class='ident'>bench</span>;
 
@@ -1090,6 +1109,13 @@
         <span class='kw'>let</span> <span class='ident'>atom</span> <span class='op'>=</span> <span class='ident'>Atom</span>::<span class='ident'>from_slice</span>(<span class='string'>&quot;foobar&quot;</span>);
         <span class='kw'>let</span> _: <span class='kw-2'>&amp;</span><span class='ident'>str</span> <span class='op'>=</span> <span class='kw-2'>&amp;</span><span class='ident'>atom</span>;
     }
+
+    <span class='attribute'>#[<span class='ident'>test</span>]</span>
+    <span class='kw'>fn</span> <span class='ident'>ensure_as_ref</span>() {
+        <span class='comment'>// Ensure we can as_ref to a &amp;str</span>
+        <span class='kw'>let</span> <span class='ident'>atom</span> <span class='op'>=</span> <span class='ident'>Atom</span>::<span class='ident'>from_slice</span>(<span class='string'>&quot;foobar&quot;</span>);
+        <span class='kw'>let</span> _: <span class='kw-2'>&amp;</span><span class='ident'>str</span> <span class='op'>=</span> <span class='ident'>atom</span>.<span class='ident'>as_ref</span>();
+    }
 }
 </pre>
 </section>
@@ -1099,7 +1125,7 @@
 
     <div id="help" class="hidden">
         <div class="shortcuts">
-            <h1>Keyboard shortcuts</h1>
+            <h1>Keyboard Shortcuts</h1>
             <dl>
                 <dt>?</dt>
                 <dd>Show this help dialog</dd>
@@ -1114,7 +1140,7 @@
             </dl>
         </div>
         <div class="infos">
-            <h1>Search tricks</h1>
+            <h1>Search Tricks</h1>
             <p>
                 Prefix searches with a type followed by a colon (e.g.
                 <code>fn:</code>) to restrict the search to a given type.
