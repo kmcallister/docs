@@ -4,10 +4,10 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="API documentation for the Rust `futf` crate.">
-    <meta name="keywords" content="rust, rustlang, rust-lang, futf">
+    <meta name="description" content="API documentation for the Rust `unreachable` fn in crate `unreachable`.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, unreachable">
 
-    <title>futf - Rust</title>
+    <title>unreachable::unreachable - Rust</title>
 
     <link rel="stylesheet" type="text/css" href="../main.css">
 
@@ -26,7 +26,7 @@
 
     <section class="sidebar">
         
-        <p class='location'></p><script>window.sidebarCurrent = {name: 'futf', ty: 'mod', relpath: '../'};</script>
+        <p class='location'><a href='index.html'>unreachable</a></p><script>window.sidebarCurrent = {name: 'unreachable', ty: 'fn', relpath: ''};</script><script defer src="sidebar-items.js"></script>
     </section>
 
     <nav class="sub">
@@ -40,44 +40,19 @@
         </form>
     </nav>
 
-    <section id='main' class="content mod">
-<h1 class='fqn'><span class='in-band'>Crate <a class='mod' href=''>futf</a></span><span class='out-of-band'><span id='render-detail'>
+    <section id='main' class="content fn">
+<h1 class='fqn'><span class='in-band'>Function <a href='index.html'>unreachable</a>::<wbr><a class='fn' href=''>unreachable</a></span><span class='out-of-band'><span id='render-detail'>
             <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                 [<span class='inner'>&#x2212;</span>]
             </a>
-        </span><a id='src-0' class='srclink' href='../src/futf/lib.rs.html#7-248' title='goto source code'>[src]</a></span></h1>
-<h2 id='structs' class='section-header'><a href="#structs">Structs</a></h2>
-<table>
-                    <tr class=' module-item'>
-                        <td><a class='struct' href='struct.Codepoint.html'
-                               title='futf::Codepoint'>Codepoint</a></td>
-                        <td class='docblock short'>
-                             <p>Represents a complete or partial UTF-8 codepoint.</p>
+        </span><a id='src-6' class='srclink' href='../src/unreachable/lib.rs.html#21-24' title='goto source code'>[src]</a></span></h1>
+<pre class='rust fn'>pub unsafe fn unreachable() -&gt; !</pre><div class='docblock'><p>Hint to the optimizer that any code path which calls this function is
+statically unreachable and can be removed.</p>
 
-                        </td>
-                    </tr>
-                </table><h2 id='enums' class='section-header'><a href="#enums">Enums</a></h2>
-<table>
-                    <tr class=' module-item'>
-                        <td><a class='enum' href='enum.Meaning.html'
-                               title='futf::Meaning'>Meaning</a></td>
-                        <td class='docblock short'>
-                             <p>Meaning of a complete or partial UTF-8 codepoint.</p>
-
-                        </td>
-                    </tr>
-                </table><h2 id='functions' class='section-header'><a href="#functions">Functions</a></h2>
-<table>
-                    <tr class=' module-item'>
-                        <td><a class='fn' href='fn.classify.html'
-                               title='futf::classify'>classify</a></td>
-                        <td class='docblock short'>
-                             <p>Describes the UTF-8 codepoint containing the byte at index <code>idx</code> within
-<code>buf</code>.</p>
-
-                        </td>
-                    </tr>
-                </table></section>
+<p>Calling this function in reachable code invokes undefined behavior. Be
+very, very sure this is what you want; often, a simple <code>panic!</code> is more
+suitable.</p>
+</div></section>
     <section id='search' class="content hidden"></section>
 
     <section class="footer"></section>
@@ -121,7 +96,7 @@
 
     <script>
         window.rootPath = "../";
-        window.currentCrate = "futf";
+        window.currentCrate = "unreachable";
         window.playgroundUrl = "";
     </script>
     <script src="../jquery.js"></script>

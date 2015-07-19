@@ -4,10 +4,10 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="API documentation for the Rust `futf` crate.">
-    <meta name="keywords" content="rust, rustlang, rust-lang, futf">
+    <meta name="description" content="API documentation for the Rust `ResultVoidExt` trait in crate `void`.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, ResultVoidExt">
 
-    <title>futf - Rust</title>
+    <title>void::ResultVoidExt - Rust</title>
 
     <link rel="stylesheet" type="text/css" href="../main.css">
 
@@ -26,7 +26,7 @@
 
     <section class="sidebar">
         
-        <p class='location'></p><script>window.sidebarCurrent = {name: 'futf', ty: 'mod', relpath: '../'};</script>
+        <p class='location'><a href='index.html'>void</a></p><script>window.sidebarCurrent = {name: 'ResultVoidExt', ty: 'trait', relpath: ''};</script><script defer src="sidebar-items.js"></script>
     </section>
 
     <nav class="sub">
@@ -40,44 +40,26 @@
         </form>
     </nav>
 
-    <section id='main' class="content mod">
-<h1 class='fqn'><span class='in-band'>Crate <a class='mod' href=''>futf</a></span><span class='out-of-band'><span id='render-detail'>
+    <section id='main' class="content trait">
+<h1 class='fqn'><span class='in-band'>Trait <a href='index.html'>void</a>::<wbr><a class='trait' href=''>ResultVoidExt</a></span><span class='out-of-band'><span id='render-detail'>
             <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                 [<span class='inner'>&#x2212;</span>]
             </a>
-        </span><a id='src-0' class='srclink' href='../src/futf/lib.rs.html#7-248' title='goto source code'>[src]</a></span></h1>
-<h2 id='structs' class='section-header'><a href="#structs">Structs</a></h2>
-<table>
-                    <tr class=' module-item'>
-                        <td><a class='struct' href='struct.Codepoint.html'
-                               title='futf::Codepoint'>Codepoint</a></td>
-                        <td class='docblock short'>
-                             <p>Represents a complete or partial UTF-8 codepoint.</p>
-
-                        </td>
-                    </tr>
-                </table><h2 id='enums' class='section-header'><a href="#enums">Enums</a></h2>
-<table>
-                    <tr class=' module-item'>
-                        <td><a class='enum' href='enum.Meaning.html'
-                               title='futf::Meaning'>Meaning</a></td>
-                        <td class='docblock short'>
-                             <p>Meaning of a complete or partial UTF-8 codepoint.</p>
-
-                        </td>
-                    </tr>
-                </table><h2 id='functions' class='section-header'><a href="#functions">Functions</a></h2>
-<table>
-                    <tr class=' module-item'>
-                        <td><a class='fn' href='fn.classify.html'
-                               title='futf::classify'>classify</a></td>
-                        <td class='docblock short'>
-                             <p>Describes the UTF-8 codepoint containing the byte at index <code>idx</code> within
-<code>buf</code>.</p>
-
-                        </td>
-                    </tr>
-                </table></section>
+        </span><a id='src-147' class='srclink' href='../src/void/lib.rs.html#72-75' title='goto source code'>[src]</a></span></h1>
+<pre class='rust trait'>pub trait ResultVoidExt&lt;T&gt;: <a class='trait' href='http://doc.rust-lang.org/nightly/core/marker/trait.Sized.html' title='core::marker::Sized'>Sized</a> {
+    fn <a href='#tymethod.void_unwrap' class='fnname'>void_unwrap</a>(self) -&gt; T;
+}</pre><div class='docblock'><p>Extensions to <code>Result&lt;T, Void&gt;</code></p>
+</div>
+            <h2 id='required-methods'>Required Methods</h2>
+            <div class='methods'>
+        <h3 id='tymethod.void_unwrap' class='method stab '><code>fn <a href='#tymethod.void_unwrap' class='fnname'>void_unwrap</a>(self) -&gt; T</code></h3><div class='docblock'><p>Get the value out of a wrapper.</p>
+</div></div>
+        <h2 id='implementors'>Implementors</h2>
+        <ul class='item-list' id='implementors-list'>
+    <li><code>impl&lt;T&gt; <a class='trait' href='../void/trait.ResultVoidExt.html' title='void::ResultVoidExt'>ResultVoidExt</a>&lt;T&gt; for <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;T, <a class='enum' href='../void/enum.Void.html' title='void::Void'>Void</a>&gt;</code></li>
+</ul><script type="text/javascript" async
+                              src="../implementors/void/trait.ResultVoidExt.js">
+                      </script></section>
     <section id='search' class="content hidden"></section>
 
     <section class="footer"></section>
@@ -121,7 +103,7 @@
 
     <script>
         window.rootPath = "../";
-        window.currentCrate = "futf";
+        window.currentCrate = "void";
         window.playgroundUrl = "";
     </script>
     <script src="../jquery.js"></script>
