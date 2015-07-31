@@ -34,7 +34,7 @@
             <div class="search-container">
                 <input class="search-input" name="search"
                        autocomplete="off"
-                       placeholder="Click or press ‘S’ to search, ‘?’ for more options…"
+                       placeholder="Click or press 'S' to search, '?' for more options..."
                        type="search">
             </div>
         </form>
@@ -318,7 +318,7 @@
     <span class='doccomment'>/// Look at the next available character, if any.</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>peek</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>char</span><span class='op'>&gt;</span> {
         <span class='comment'>// Invariant: all buffers in the queue are non-empty.</span>
-        <span class='self'>self</span>.<span class='ident'>buffers</span>.<span class='ident'>front</span>().<span class='ident'>map</span>(<span class='op'>|</span><span class='ident'>b</span><span class='op'>|</span> <span class='ident'>b</span>.<span class='ident'>char_at</span>(<span class='number'>0</span>))
+        <span class='self'>self</span>.<span class='ident'>buffers</span>.<span class='ident'>front</span>().<span class='ident'>map</span>(<span class='op'>|</span><span class='ident'>b</span><span class='op'>|</span> <span class='ident'>b</span>.<span class='ident'>chars</span>().<span class='ident'>next</span>().<span class='ident'>unwrap</span>())
     }
 
     <span class='doccomment'>/// Get the next character, if one is available.</span>
@@ -485,7 +485,7 @@
 
     <div id="help" class="hidden">
         <div class="shortcuts">
-            <h1>Keyboard Shortcuts</h1>
+            <h1>Keyboard shortcuts</h1>
             <dl>
                 <dt>?</dt>
                 <dd>Show this help dialog</dd>
@@ -500,7 +500,7 @@
             </dl>
         </div>
         <div class="infos">
-            <h1>Search Tricks</h1>
+            <h1>Search tricks</h1>
             <p>
                 Prefix searches with a type followed by a colon (e.g.
                 <code>fn:</code>) to restrict the search to a given type.
