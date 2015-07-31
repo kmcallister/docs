@@ -45,18 +45,77 @@
             <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                 [<span class='inner'>&#x2212;</span>]
             </a>
-        </span><a id='src-98263' class='srclink' href='../../src/html5ever/rcdom.rs.html#80' title='goto source code'>[src]</a></span></h1>
+        </span><a id='src-97466' class='srclink' href='../../src/html5ever/rcdom.rs.html#80' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct Handle(_);</pre><div class='docblock'><p>Reference to a DOM node.</p>
-</div><h2 id='deref-methods'>Methods from <a class='trait' href='http://doc.rust-lang.org/nightly/core/ops/trait.Deref.html' title='core::ops::Deref'>Deref</a>&lt;Target=<a class='struct' href='../../rc/stable_rc/struct.Rc.html' title='rc::stable_rc::Rc'>Rc</a>&lt;<a class='struct' href='http://doc.rust-lang.org/nightly/core/cell/struct.RefCell.html' title='core::cell::RefCell'>RefCell</a>&lt;<a class='struct' href='../../html5ever/rcdom/struct.Node.html' title='html5ever::rcdom::Node'>Node</a>&gt;&gt;&gt;</h2><div class='impl-items'></div><div class='impl-items'><h4 id='method.downgrade' class='method'><code>fn <a href='#method.downgrade' class='fnname'>downgrade</a>(&amp;self) -&gt; <a class='struct' href='../../rc/stable_rc/struct.Weak.html' title='rc::stable_rc::Weak'>Weak</a>&lt;T&gt;</code></h4>
+</div><h2 id='deref-methods'>Methods from <a class='trait' href='http://doc.rust-lang.org/nightly/core/ops/trait.Deref.html' title='core::ops::Deref'>Deref</a>&lt;Target=<a class='struct' href='../../rc/stable_rc/struct.Rc.html' title='rc::stable_rc::Rc'>Rc</a>&lt;<a class='struct' href='http://doc.rust-lang.org/nightly/core/cell/struct.RefCell.html' title='core::cell::RefCell'>RefCell</a>&lt;<a class='struct' href='../../html5ever/rcdom/struct.Node.html' title='html5ever::rcdom::Node'>Node</a>&gt;&gt;&gt;</h2><div class='impl-items'><h4 id='method.new' class='method'><code>fn <a href='#method.new' class='fnname'>new</a>(value: T) -&gt; <a class='struct' href='../../rc/stable_rc/struct.Rc.html' title='rc::stable_rc::Rc'>Rc</a>&lt;T&gt;</code></h4>
+<div class='docblock'><p>Constructs a new <code>Rc&lt;T&gt;</code>.</p>
+
+<h1 id="examples" class='section-header'><a
+                           href="#examples">Examples</a></h1><pre id='rust-example-rendered' class='rust '>
+<span class='kw'>use</span> <span class='ident'>rc</span>::<span class='ident'>Rc</span>;
+
+<span class='kw'>let</span> <span class='ident'>five</span> <span class='op'>=</span> <span class='ident'>Rc</span>::<span class='ident'>new</span>(<span class='number'>5</span>);
+</pre>
+</div><h4 id='method.try_unwrap' class='method'><code>fn <a href='#method.try_unwrap' class='fnname'>try_unwrap</a>(rc: <a class='struct' href='../../rc/stable_rc/struct.Rc.html' title='rc::stable_rc::Rc'>Rc</a>&lt;T&gt;) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;T, <a class='struct' href='../../rc/stable_rc/struct.Rc.html' title='rc::stable_rc::Rc'>Rc</a>&lt;T&gt;&gt;</code></h4>
+<div class='docblock'><p>Unwraps the contained value if the <code>Rc&lt;T&gt;</code> is unique.</p>
+
+<p>If the <code>Rc&lt;T&gt;</code> is not unique, an <code>Err</code> is returned with the same
+<code>Rc&lt;T&gt;</code>.</p>
+
+<h1 id="examples" class='section-header'><a
+                           href="#examples">Examples</a></h1><pre id='rust-example-rendered' class='rust '>
+<span class='kw'>use</span> <span class='ident'>rc</span>::<span class='ident'>Rc</span>;
+
+<span class='kw'>let</span> <span class='ident'>x</span> <span class='op'>=</span> <span class='ident'>Rc</span>::<span class='ident'>new</span>(<span class='number'>3</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>Rc</span>::<span class='ident'>try_unwrap</span>(<span class='ident'>x</span>), <span class='prelude-val'>Ok</span>(<span class='number'>3</span>));
+
+<span class='kw'>let</span> <span class='ident'>x</span> <span class='op'>=</span> <span class='ident'>Rc</span>::<span class='ident'>new</span>(<span class='number'>4</span>);
+<span class='kw'>let</span> <span class='ident'>_y</span> <span class='op'>=</span> <span class='ident'>x</span>.<span class='ident'>clone</span>();
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>Rc</span>::<span class='ident'>try_unwrap</span>(<span class='ident'>x</span>), <span class='prelude-val'>Err</span>(<span class='ident'>Rc</span>::<span class='ident'>new</span>(<span class='number'>4</span>)));
+</pre>
+</div></div><div class='impl-items'><h4 id='method.downgrade' class='method'><code>fn <a href='#method.downgrade' class='fnname'>downgrade</a>(&amp;self) -&gt; <a class='struct' href='../../rc/stable_rc/struct.Weak.html' title='rc::stable_rc::Weak'>Weak</a>&lt;T&gt;</code></h4>
 <div class='docblock'><p>Downgrades the <code>Rc&lt;T&gt;</code> to a <code>Weak&lt;T&gt;</code> reference.</p>
 
 <h1 id="examples" class='section-header'><a
-                           href="#examples">Examples</a></h1><pre class='rust rust-example-rendered'>
+                           href="#examples">Examples</a></h1><pre id='rust-example-rendered' class='rust '>
 <span class='kw'>use</span> <span class='ident'>rc</span>::<span class='ident'>Rc</span>;
 
 <span class='kw'>let</span> <span class='ident'>five</span> <span class='op'>=</span> <span class='ident'>Rc</span>::<span class='ident'>new</span>(<span class='number'>5</span>);
 
 <span class='kw'>let</span> <span class='ident'>weak_five</span> <span class='op'>=</span> <span class='ident'>five</span>.<span class='ident'>downgrade</span>();
+</pre>
+</div><h4 id='method.weak_count' class='method'><code>fn <a href='#method.weak_count' class='fnname'>weak_count</a>(this: &amp;<a class='struct' href='../../rc/stable_rc/struct.Rc.html' title='rc::stable_rc::Rc'>Rc</a>&lt;T&gt;) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a></code></h4>
+<div class='docblock'><p>Get the number of weak references to this value.</p>
+</div><h4 id='method.strong_count' class='method'><code>fn <a href='#method.strong_count' class='fnname'>strong_count</a>(this: &amp;<a class='struct' href='../../rc/stable_rc/struct.Rc.html' title='rc::stable_rc::Rc'>Rc</a>&lt;T&gt;) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a></code></h4>
+<div class='docblock'><p>Get the number of strong references to this value.</p>
+</div><h4 id='method.is_unique' class='method'><code>fn <a href='#method.is_unique' class='fnname'>is_unique</a>(rc: &amp;<a class='struct' href='../../rc/stable_rc/struct.Rc.html' title='rc::stable_rc::Rc'>Rc</a>&lt;T&gt;) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
+<div class='docblock'><p>Returns true if there are no other <code>Rc</code> or <code>Weak&lt;T&gt;</code> values that share
+the same inner value.</p>
+
+<h1 id="examples" class='section-header'><a
+                           href="#examples">Examples</a></h1><pre id='rust-example-rendered' class='rust '>
+<span class='kw'>use</span> <span class='ident'>rc</span>::<span class='ident'>Rc</span>;
+
+<span class='kw'>let</span> <span class='ident'>five</span> <span class='op'>=</span> <span class='ident'>Rc</span>::<span class='ident'>new</span>(<span class='number'>5</span>);
+
+<span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>Rc</span>::<span class='ident'>is_unique</span>(<span class='kw-2'>&amp;</span><span class='ident'>five</span>));
+</pre>
+</div><h4 id='method.get_mut' class='method'><code>fn <a href='#method.get_mut' class='fnname'>get_mut</a>(rc: &amp;mut <a class='struct' href='../../rc/stable_rc/struct.Rc.html' title='rc::stable_rc::Rc'>Rc</a>&lt;T&gt;) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;&amp;mut T&gt;</code></h4>
+<div class='docblock'><p>Returns a mutable reference to the contained value if the <code>Rc&lt;T&gt;</code> is
+unique.</p>
+
+<p>Returns <code>None</code> if the <code>Rc&lt;T&gt;</code> is not unique.</p>
+
+<h1 id="examples" class='section-header'><a
+                           href="#examples">Examples</a></h1><pre id='rust-example-rendered' class='rust '>
+<span class='kw'>use</span> <span class='ident'>rc</span>::<span class='ident'>Rc</span>;
+
+<span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>x</span> <span class='op'>=</span> <span class='ident'>Rc</span>::<span class='ident'>new</span>(<span class='number'>3</span>);
+<span class='op'>*</span><span class='ident'>Rc</span>::<span class='ident'>get_mut</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>x</span>).<span class='ident'>unwrap</span>() <span class='op'>=</span> <span class='number'>4</span>;
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='op'>*</span><span class='ident'>x</span>, <span class='number'>4</span>);
+
+<span class='kw'>let</span> <span class='ident'>_y</span> <span class='op'>=</span> <span class='ident'>x</span>.<span class='ident'>clone</span>();
+<span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>Rc</span>::<span class='ident'>get_mut</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>x</span>).<span class='ident'>is_none</span>());
 </pre>
 </div></div><div class='impl-items'><h4 id='method.make_unique' class='method'><code>fn <a href='#method.make_unique' class='fnname'>make_unique</a>(&amp;mut self) -&gt; &amp;mut T</code></h4>
 <div class='docblock'><p>Make a mutable reference from the given <code>Rc&lt;T&gt;</code>.</p>
@@ -65,7 +124,7 @@
 data is cloned if the reference count is greater than one.</p>
 
 <h1 id="examples" class='section-header'><a
-                           href="#examples">Examples</a></h1><pre class='rust rust-example-rendered'>
+                           href="#examples">Examples</a></h1><pre id='rust-example-rendered' class='rust '>
 <span class='kw'>use</span> <span class='ident'>rc</span>::<span class='ident'>Rc</span>;
 
 <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>five</span> <span class='op'>=</span> <span class='ident'>Rc</span>::<span class='ident'>new</span>(<span class='number'>5</span>);
