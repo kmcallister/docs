@@ -1,0 +1,1 @@
+initSidebarItems({"mod":[["dimacs","Invoke an external SAT solver program which uses the DIMACS / MiniSAT file format."]],"trait":[["Solver","Trait for SAT solvers."]]});

@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["Dimacs","A SAT solver which invokes an external program using the DIMACS / MiniSAT file format."]]});
