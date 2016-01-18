@@ -9,6 +9,7 @@
 
     <title>tempfile::NamedTempFileOptions - Rust</title>
 
+    <link rel="stylesheet" type="text/css" href="../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../main.css">
 
     
@@ -45,7 +46,7 @@
             <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                 [<span class='inner'>&#x2212;</span>]
             </a>
-        </span><a id='src-196' class='srclink' href='../src/tempfile/named.rs.html#258-262' title='goto source code'>[src]</a></span></h1>
+        </span><a id='src-197' class='srclink' href='../src/tempfile/named.rs.html#258-262' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct NamedTempFileOptions&lt;'a, 'b&gt; {
     // some fields omitted
 }</pre><div class='docblock'><p>Create a new temporary file with custom parameters.</p>
@@ -62,17 +63,17 @@
 <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;{:?}&quot;</span>, <span class='ident'>named_temp_file</span>);        <span class='comment'>//Something like &quot;NamedTempFile(\&quot;/tmp/hogehoge65R8Y.rs\&quot;)&quot;</span></pre>
 </div><h2 id='methods'>Methods</h2><h3 class='impl'><code>impl&lt;'a, 'b&gt; <a class='struct' href='../tempfile/struct.NamedTempFileOptions.html' title='tempfile::NamedTempFileOptions'>NamedTempFileOptions</a>&lt;'a, 'b&gt;</code></h3><div class='impl-items'><h4 id='method.new' class='method'><code>fn <a href='#method.new' class='fnname'>new</a>() -&gt; Self</code></h4>
 <div class='docblock'><p>Create a new NamedTempFileOptions</p>
-</div><h4 id='method.prefix' class='method'><code>fn <a href='#method.prefix' class='fnname'>prefix</a>(&amp;mut self, prefix: &amp;'a <a href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>) -&gt; &amp;mut Self</code></h4>
+</div><h4 id='method.prefix' class='method'><code>fn <a href='#method.prefix' class='fnname'>prefix</a>(&amp;mut self, prefix: &amp;'a <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>) -&gt; &amp;mut Self</code></h4>
 <div class='docblock'><p>Set a custom filename prefix.</p>
 
 <p>Path separators are legal but not advisable.
 Default: &quot;.tmp&quot;</p>
-</div><h4 id='method.suffix' class='method'><code>fn <a href='#method.suffix' class='fnname'>suffix</a>(&amp;mut self, suffix: &amp;'b <a href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>) -&gt; &amp;mut Self</code></h4>
+</div><h4 id='method.suffix' class='method'><code>fn <a href='#method.suffix' class='fnname'>suffix</a>(&amp;mut self, suffix: &amp;'b <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>) -&gt; &amp;mut Self</code></h4>
 <div class='docblock'><p>Set a custom filename suffix.</p>
 
 <p>Path separators are legal but not advisable.
 Default: &quot;&quot;</p>
-</div><h4 id='method.rand_bytes' class='method'><code>fn <a href='#method.rand_bytes' class='fnname'>rand_bytes</a>(&amp;mut self, rand: <a href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>) -&gt; &amp;mut Self</code></h4>
+</div><h4 id='method.rand_bytes' class='method'><code>fn <a href='#method.rand_bytes' class='fnname'>rand_bytes</a>(&amp;mut self, rand: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>) -&gt; &amp;mut Self</code></h4>
 <div class='docblock'><p>Set the number of random bytes.</p>
 
 <p>Default: 6</p>
@@ -80,8 +81,8 @@ Default: &quot;&quot;</p>
 <div class='docblock'><p>Create the named temporary file.</p>
 </div><h4 id='method.create_in' class='method'><code>fn <a href='#method.create_in' class='fnname'>create_in</a>&lt;P: <a class='trait' href='https://doc.rust-lang.org/nightly/core/convert/trait.AsRef.html' title='core::convert::AsRef'>AsRef</a>&lt;<a class='struct' href='https://doc.rust-lang.org/nightly/std/path/struct.Path.html' title='std::path::Path'>Path</a>&gt;&gt;(&amp;self, dir: P) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/std/io/error/type.Result.html' title='std::io::error::Result'>Result</a>&lt;<a class='struct' href='../tempfile/struct.NamedTempFile.html' title='tempfile::NamedTempFile'>NamedTempFile</a>&gt;</code></h4>
 <div class='docblock'><p>Create the named temporary file in the specified directory.</p>
-</div></div><h2 id='implementations'>Trait Implementations</h2><h3 id='derived_implementations'>Derived Implementations </h3><h3 class='impl'><code>impl&lt;'a, 'b&gt; <a class='trait' href='https://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html' title='core::cmp::PartialEq'>PartialEq</a> for <a class='struct' href='../tempfile/struct.NamedTempFileOptions.html' title='tempfile::NamedTempFileOptions'>NamedTempFileOptions</a>&lt;'a, 'b&gt;</code></h3><div class='impl-items'><h4 id='method.eq' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html#method.eq' class='fnname'>eq</a>(&amp;self, __arg_0: &amp;<a class='struct' href='../tempfile/struct.NamedTempFileOptions.html' title='tempfile::NamedTempFileOptions'>NamedTempFileOptions</a>&lt;'a, 'b&gt;) -&gt; <a href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
-<h4 id='method.ne' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html#method.ne' class='fnname'>ne</a>(&amp;self, __arg_0: &amp;<a class='struct' href='../tempfile/struct.NamedTempFileOptions.html' title='tempfile::NamedTempFileOptions'>NamedTempFileOptions</a>&lt;'a, 'b&gt;) -&gt; <a href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
+</div></div><h2 id='implementations'>Trait Implementations</h2><h3 id='derived_implementations'>Derived Implementations </h3><h3 class='impl'><code>impl&lt;'a, 'b&gt; <a class='trait' href='https://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html' title='core::cmp::PartialEq'>PartialEq</a> for <a class='struct' href='../tempfile/struct.NamedTempFileOptions.html' title='tempfile::NamedTempFileOptions'>NamedTempFileOptions</a>&lt;'a, 'b&gt;</code></h3><div class='impl-items'><h4 id='method.eq' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html#method.eq' class='fnname'>eq</a>(&amp;self, __arg_0: &amp;<a class='struct' href='../tempfile/struct.NamedTempFileOptions.html' title='tempfile::NamedTempFileOptions'>NamedTempFileOptions</a>&lt;'a, 'b&gt;) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
+<h4 id='method.ne' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html#method.ne' class='fnname'>ne</a>(&amp;self, __arg_0: &amp;<a class='struct' href='../tempfile/struct.NamedTempFileOptions.html' title='tempfile::NamedTempFileOptions'>NamedTempFileOptions</a>&lt;'a, 'b&gt;) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
 </div><h3 class='impl'><code>impl&lt;'a, 'b&gt; <a class='trait' href='https://doc.rust-lang.org/nightly/core/cmp/trait.Eq.html' title='core::cmp::Eq'>Eq</a> for <a class='struct' href='../tempfile/struct.NamedTempFileOptions.html' title='tempfile::NamedTempFileOptions'>NamedTempFileOptions</a>&lt;'a, 'b&gt;</code></h3><div class='impl-items'></div><h3 class='impl'><code>impl&lt;'a, 'b&gt; <a class='trait' href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html' title='core::clone::Clone'>Clone</a> for <a class='struct' href='../tempfile/struct.NamedTempFileOptions.html' title='tempfile::NamedTempFileOptions'>NamedTempFileOptions</a>&lt;'a, 'b&gt;</code></h3><div class='impl-items'><h4 id='method.clone' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#method.clone' class='fnname'>clone</a>(&amp;self) -&gt; <a class='struct' href='../tempfile/struct.NamedTempFileOptions.html' title='tempfile::NamedTempFileOptions'>NamedTempFileOptions</a>&lt;'a, 'b&gt;</code></h4>
 <h4 id='method.clone_from' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#method.clone_from' class='fnname'>clone_from</a>(&amp;mut self, source: &amp;Self)</code></h4>
 </div><h3 class='impl'><code>impl&lt;'a, 'b&gt; <a class='trait' href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html' title='core::fmt::Debug'>Debug</a> for <a class='struct' href='../tempfile/struct.NamedTempFileOptions.html' title='tempfile::NamedTempFileOptions'>NamedTempFileOptions</a>&lt;'a, 'b&gt;</code></h3><div class='impl-items'><h4 id='method.fmt' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html#method.fmt' class='fnname'>fmt</a>(&amp;self, __arg_0: &amp;mut <a class='struct' href='https://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html' title='core::fmt::Formatter'>Formatter</a>) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/core/fmt/type.Result.html' title='core::fmt::Result'>Result</a></code></h4>
@@ -144,6 +145,6 @@ Default: &quot;&quot;</p>
     <script src="../jquery.js"></script>
     <script src="../main.js"></script>
     
-    <script async src="../search-index.js"></script>
+    <script defer src="../search-index.js"></script>
 </body>
 </html>
